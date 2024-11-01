@@ -1,0 +1,5 @@
+const appName = '';
+
+const firebaseConfig = {
+};
+  

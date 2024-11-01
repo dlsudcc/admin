@@ -1,0 +1,32 @@
+/* header.component.scss */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.dropdown-item {
+  padding: 6px 10px 6px 10px;
+  font-size: .875rem;
+}
+.sidebar-open {
+  display: flex;
+  width: 260px;
+  padding-top: 1rem;
+  transition: width linear 100ms;
+}
+.sidebar-close {
+  width: 0px;
+  padding-top: 0px;
+  transition: width linear 100ms;
+}
+
+.flexible-width {
+  flex-grow: 1; /* This element will take up the remaining space */
+}
+.nav-header {
+  // max-width: calc(100% - 260px);
+  display: flex;
+  // flex-wrap: wrap;
+  // align-items: center;
+  // justify-content: space-between;
+}

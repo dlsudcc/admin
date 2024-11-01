@@ -1,0 +1,90 @@
+/* You can add global styles to this file, and also import other style files */
+/* styles.scss */
+
+/* Light theme variables */
+$light-bg-color: #ffffff;
+$light-text-color: #333333;
+$light-header-bg: #f8f9fa;
+$light-link-color: #333333;
+$light-btn-bg: #333333;
+$light-btn-text: #ffffff;
+
+/* Dark theme variables */
+$dark-bg-color: #212529;
+$dark-text-color: #f8f9fa;
+$dark-header-bg: #343a40;
+$dark-link-color: #f8f9fa;
+$dark-btn-bg: #212529;
+$dark-btn-text: #f8f9fa;
+
+/* Base styles for transition */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light theme (default) */
+body {
+  background-color: $light-bg-color;
+  color: $light-text-color;
+}
+
+a {
+  color: $light-link-color;
+  text-decoration: none;
+  
+  &:hover {
+    color: lighten($light-link-color, 10%);
+  }
+}
+
+button {
+  background-color: $light-btn-bg;
+  color: $light-btn-text;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Dark theme */
+.dark-theme {
+    body, div, main, app-header, app-admin {
+        background-color: $dark-bg-color;
+        color: $dark-text-color;
+    }
+
+    a {
+        color: $dark-link-color;
+        &:hover {
+            color: lighten($dark-link-color, 10%);
+        }
+    }
+
+    button, button:active {
+        background-color: $dark-btn-bg;
+        color: $dark-btn-text;
+    }
+
+    header {
+        background-color: $dark-header-bg;
+    }
+}
+.log-out {
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+}
+.icon {
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;
+}
+.icon-md {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+}

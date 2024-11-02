@@ -1,0 +1,13 @@
+<!-- sidebar.component.html -->
+<div *ngFor="let toast of toasts; let i = index" >
+  <div class="toast show" style="position: fixed; right: 20px; z-index: 1050; transition: all 0.5s;" [ngStyle]="{'top': (i * 100) + 'px'}">
+      <div class="toast-header" [class]="toast.class">
+        <strong class="mr-auto">{{ toast.title }}</strong>
+        <button type="button" class="ml-2 mb-1 close" (click)="remove(i)">&times;</button>
+      </div>
+      <div class="toast-body">
+          {{ toast.message }}
+      </div>
+      <div class="timer-bar" [class]="toast.class" [ngStyle]="{'width': (toast.timeLeft! / toast.duration * 100) + '%'}"></div>
+  </div>
+</div>

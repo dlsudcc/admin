@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThemeService } from '../shared/theme.service';
+import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +12,9 @@ export class HeaderComponent implements OnInit {
   @Output() sidebarToggle = new EventEmitter<void>();
   @Input() isSideBarOpen = false;
   isDarkMode = false;
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService, private authService: AuthService,
+    private router: Router
+  ) {
 
   }
   toggleSidebar() {
@@ -24,5 +28,9 @@ export class HeaderComponent implements OnInit {
     this.themeService.darkMode$.subscribe(theme => {
       this.isDarkMode = theme;
     })
+  }
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(['login']);
   }
 }

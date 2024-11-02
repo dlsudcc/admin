@@ -1,0 +1,31 @@
+<div class="container-fluid vh-100">
+    <div class="row h-100">
+        <!-- Left side: Login form -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center login-section">
+            <div class="w-75">
+                <h2 class="mb-4 text-center">Login</h2>
+                <form (submit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input [(ngModel)]="form.email" name="email" type="text" class="form-control" placeholder="Enter email">
+                    
+                        <div *ngIf="form.errors?.email" class="text-danger">
+                            {{ form.errors?.email }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input [(ngModel)]="form.password" name="password" type="password" class="form-control" placeholder="Password">
+                        <div *ngIf="form.errors?.password" class="text-danger">
+                            {{ form.errors?.password }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Right side: Rotating image -->
+        <div class="col-md-6 image-section"></div>
+    </div>
+</div>

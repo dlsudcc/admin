@@ -1,0 +1,28 @@
+
+.toast {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.toast.show {
+    opacity: 1;
+}.timer-bar {
+    height: 4px; /* Height of the timer bar */
+    background-color: rgba(255, 255, 255, 0.7); /* Background color for the bar */
+    width: 100%; /* Start full width */
+    position: absolute; /* Positioning */
+    bottom: 0; /* Align to the bottom of the toast */
+    left: 0; /* Start from the left */
+}
+
+.animate-timer {
+    animation: countdown linear forwards; /* Use the countdown animation */
+}
+
+@keyframes countdown {
+    from {
+        width: 100%; /* Start at full width */
+    }
+    to {
+        width: 0%; /* End at zero width */
+    }
+}

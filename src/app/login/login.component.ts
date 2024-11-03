@@ -40,15 +40,20 @@ export class LoginComponent {
       this.loadingService.hide();
       this.router.navigate(['admin']);
     } else {
-      try {
-        const result = await this.authService.login(this.form);
-        console.log('Logged in:', result);
-        this.toastService.add("Success", "Login Successful", ToastType.SUCCESS);
-        this.router.navigate(['admin']);
-        // Handle successful login (e.g., navigate to another page)
-      } catch (error) {
-        console.error('Login failed:', error);
-        // Display an error message to the user
+      if (this.form.valid()) {
+        try {
+          const result = await this.authService.login(this.form);
+          this.loadingService.hide();
+          this.toastService.add("Success", "Login Successful", ToastType.SUCCESS);
+          this.router.navigate(['admin']);
+          // Handle successful login (e.g., navigate to another page)
+        } catch (error) {
+          this.loadingService.hide();
+          this.form.addError('form', 'Invalid credentials');
+          // Display an error message to the user
+        }
+      } else {
+        this.loadingService.hide();
       }
       // this.firebaseService.add(this.form, "users").then(result=> {
 

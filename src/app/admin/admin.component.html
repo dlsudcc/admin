@@ -1,4 +1,4 @@
-<div class="container sidebar bg-light" [ngClass]="{'sidebar-close': !isSidebarOpen}">
+<div class="container sidebar sidebar-main" [ngClass]="{'sidebar-close': !isSidebarOpen}">
     <div class="row">
         <div class="col-12">asd</div>
     </div>
@@ -7,10 +7,10 @@
 <app-header (sidebarToggle)="toggleSidebar()" [isSideBarOpen]='isSidebarOpen'></app-header>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 pl-0">
         <main class="d-flex">
-            <div [class]="isSidebarOpen ? 'sidebar-content-open' : 'sidebar-content-close'">
-                asd
+            <div class="sidebar-main" [class]="isSidebarOpen ? 'sidebar-content-open' : 'sidebar-content-close'">
+                asdss
             </div>
             <div class="content">
                 <h2>Dashboard</h2>

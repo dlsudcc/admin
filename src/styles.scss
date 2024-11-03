@@ -21,9 +21,12 @@ $dark-btn-text: #f8f9fa;
 *,
 *::before,
 *::after {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 100ms ease, color 10ms ease;
 }
-
+.sidebar-main {
+  border-right: 1px solid gray;
+  background-color: $dark-bg-color;
+}
 /* Light theme (default) */
 body {
   background-color: $light-bg-color;
@@ -50,7 +53,7 @@ button {
 
 /* Dark theme */
 .dark-theme {
-    body, div, main, app-header, app-admin {
+    body, div:not(.sidebar-main), main, app-header, app-admin {
         background-color: $dark-bg-color;
         color: $dark-text-color;
     }

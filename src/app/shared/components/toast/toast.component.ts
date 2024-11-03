@@ -16,15 +16,11 @@ export class ToastComponent {
         this.toasts.push(toast);
         const interval = setInterval(() => {
           toast.timeLeft! -= 10; // Decrease time left by 100ms
-          console.log(toast);
           if (toast.timeLeft! <= 0) {
             clearInterval(interval);
             this.remove(this.toasts.indexOf(toast)); // Remove the toast when time runs out
           }
         }, 10);
-        // setTimeout(() => {
-        //   this.remove(0);
-        // }, toast.duration * 1000);
       }
     });
   }

@@ -62,15 +62,24 @@ body {
 }
 
 .sidebar-content-open {
-  width: 260px;
+  width: 272px;
   transition: width linear 100ms;
 }
 .sidebar-content-close {
   width: 0px;
-  opacity: 0;
+  overflow: hidden;
   transition: width linear 100ms;
-  transition: opacity linear 100ms;
+}
+.sidebar-content-close > div {
+  width: 0px !important;
 }
 .content {
   transition: all linear 100ms;
+}
+.container-main {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }

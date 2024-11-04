@@ -1,0 +1,10 @@
+<div class="container m-0 p-0 h-100vh">
+    <div class="row navigation-row cursor-pointer" *ngFor="let navigation of navigations">
+        <div class="col-sidebar text-white" [class]="!isSidebarOpen ? '' : 'd-flex'" [routerLink]="navigation.link">
+            <div class="navigation-icon mr-2" [class]="navigation.icon" *ngIf="isSidebarOpen">
+                <i-lucide [name]="navigation.name" class="navigation-icon d-flex align-items-center"></i-lucide>
+            </div>
+            <div>{{ navigation.description }}</div>
+        </div>
+    </div>
+</div>

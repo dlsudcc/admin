@@ -5,8 +5,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { AdminRoutingModule } from './admin-routing.module';
 
 
 
@@ -20,6 +19,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
   imports: [
     CommonModule,
     SharedModule,
+    AdminRoutingModule
   ]
 })
 export class AdminModule { }

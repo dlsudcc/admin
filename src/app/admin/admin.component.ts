@@ -19,7 +19,6 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     private loadingService: LoadingService
   ) {
-
   }
 
   ngOnInit() {

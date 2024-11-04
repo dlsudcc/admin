@@ -4,6 +4,8 @@ import { LucideAngularModule, icons } from 'lucide-angular';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { LoadingService } from './services/loading.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { LoadingService } from './services/loading.service';
     LucideAngularModule,
     LoadingComponent,
     ToastComponent,
+    CommonModule,
   ],
   providers: [
     LoadingService

@@ -1,20 +1,25 @@
-<div class="container sidebar sidebar-main" [ngClass]="{'sidebar-close': !isSidebarOpen}">
-    <div class="row">
-        <div class="col-12">asd</div>
-    </div>
+<div class="container sidebar"[class]="isSidebarOpen ? 'sidebar-main border-main' : 'sidebar-close'">
+    <app-sidebar></app-sidebar>
 </div>
 <div class="container sidebar-backdrop" [ngClass]="{'d-none': !isSidebarOpen}" (click)="closeSideBar()"></div>
 <app-header (sidebarToggle)="toggleSidebar()" [isSideBarOpen]='isSidebarOpen'></app-header>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 pl-0">
-        <main class="d-flex">
-            <div class="sidebar-main" [class]="isSidebarOpen ? 'sidebar-content-open' : 'sidebar-content-close'">
-                asdss
-            </div>
-            <div class="content">
-                <h2>Dashboard</h2>
-                <p>Welcome to the admin panel!</p>
+    <div class="col-12 p-0">
+        <main>
+            <div class="container-main">
+                <div class="row" style="margin-right: calc(100%-64px)">
+                    <div [class]="isSidebarOpen ? 'col-sidebar' : ''">
+                        <div class="sidebar-main " [class]="isSidebarOpen ? 'sidebar-content-open border-main' : 'sidebar-content-close'">
+                            <app-sidebar [isSidebarOpen]="isSidebarOpen"></app-sidebar>
+                        </div>
+                    </div>
+                    <div class="col p-0">
+                        <div class="content p-0 m-0 w-100" [class]="isSidebarOpen ? 'sidebar-content-open-content' : ''">
+                            <router-outlet></router-outlet>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

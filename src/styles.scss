@@ -11,6 +11,7 @@ $light-btn-text: #ffffff;
 
 /* Dark theme variables */
 $dark-bg-color: #212529;
+$highlight-color: #333333;
 $dark-text-color: #f8f9fa;
 $dark-header-bg: #343a40;
 $dark-link-color: #f8f9fa;
@@ -23,8 +24,10 @@ $dark-btn-text: #f8f9fa;
 *::after {
   transition: background-color 100ms ease, color 10ms ease;
 }
-.sidebar-main {
+.border-main {
   border-right: 1px solid gray;
+}
+.sidebar-main {
   background-color: $dark-bg-color;
 }
 /* Light theme (default) */
@@ -109,4 +112,40 @@ button {
   font-size: .875rem !important;
   line-height: 1.5 !important;
   border-radius: .2rem !important;
+}
+.btn:focus, .btn:active, .btn {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.sidebar-content-open-content {
+  margin-left: 260px !important;
+}
+
+.navbar.navigation {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  border-top: 1px solid gray
+}
+    
+.navbar.navigation ul {
+  list-style-type: none;
+  display: flex;
+  gap: .2rem;
+}
+
+.navbar.navigation li {
+  font-weight: bold;
+}
+.col-sidebar {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 272px;
+}
+.sidebar-open,.navigation-top  {
+  border-bottom: 1px solid gray
+}
+.navigation-row:hover {
+  background-color: $highlight-color;
+  cursor: pointer;
 }

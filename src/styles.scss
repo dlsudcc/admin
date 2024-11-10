@@ -3,18 +3,22 @@
 
 /* Light theme variables */
 $light-bg-color: #ffffff;
-$light-text-color: #333333;
+$light-text-color: #336021;
 $light-header-bg: #f8f9fa;
-$light-link-color: #333333;
-$light-btn-bg: #333333;
+$light-link-color: #336021;
+$light-link-color-hover: #ccb62d;
+$light-btn-bg: #336021;
 $light-btn-text: #ffffff;
 
+$highlight-color: #ccb62d;
+$table-hover-color: #d8d1bd;
+$black-text-color: #212529;
 /* Dark theme variables */
 $dark-bg-color: #212529;
-$highlight-color: #333333;
 $dark-text-color: #f8f9fa;
 $dark-header-bg: #343a40;
-$dark-link-color: #f8f9fa;
+$dark-link-color: #ccb62d;
+$dark-link-color-hover: #f8f9fa;
 $dark-btn-bg: #212529;
 $dark-btn-text: #f8f9fa;
 
@@ -30,6 +34,9 @@ $dark-btn-text: #f8f9fa;
 .sidebar-main {
   background-color: $dark-bg-color;
 }
+.highlight-color {
+  color: $highlight-color;
+}
 /* Light theme (default) */
 body {
   background-color: $light-bg-color;
@@ -37,12 +44,13 @@ body {
 }
 
 a {
-  color: $light-link-color;
-  text-decoration: none;
-  
-  &:hover {
-    color: lighten($light-link-color, 10%);
-  }
+  color: $light-link-color !important;
+  text-decoration: none !important;
+
+}  
+a:hover {
+  color: $light-link-color-hover !important;
+  text-decoration: none !important;
 }
 
 button {
@@ -56,26 +64,32 @@ button {
 
 /* Dark theme */
 .dark-theme {
-    body, div:not(.sidebar-main), main, app-header, app-admin {
-        background-color: $dark-bg-color;
-        color: $dark-text-color;
-    }
+  button {
+    color: $dark-btn-text;
+  }
+  button:not(.no-animation):hover {
+    color: $dark-link-color-hover !important;
+  }
+  body, div:not(.sidebar-main, .color-unchange), main, app-header, app-admin {
+      background-color: $dark-bg-color;
+      color: $dark-text-color;
+  }
+  table, tr, th {
+    color: $dark-text-color;
+  }
+  a {
+    color: $dark-link-color !important;
+    text-decoration: none !important;
+  }
+  a:hover {
+    color: $dark-link-color-hover !important;
+    text-decoration: none !important;
+  }
+  
 
-    a {
-        color: $dark-link-color;
-        &:hover {
-            color: lighten($dark-link-color, 10%);
-        }
-    }
-
-    button, button:active {
-        background-color: $dark-btn-bg;
-        color: $dark-btn-text;
-    }
-
-    header {
-        background-color: $dark-header-bg;
-    }
+  header {
+      background-color: $dark-header-bg;
+  }
 }
 .log-out {
     -webkit-transform: rotate(-180deg);
@@ -93,6 +107,13 @@ button {
     height: 30px;
     margin-left: 5px;
     margin-right: 5px;
+}
+.icon-sm {
+    width: 20px;
+    height: 20px;
+}
+.th-sort {
+  cursor: pointer;
 }
 .form-control {
   height: calc(1.5em + .5rem + 2px) !important;
@@ -120,7 +141,9 @@ button {
 .sidebar-content-open-content {
   margin-left: 260px !important;
 }
-
+.listing-row:hover {
+  background-color: $table-hover-color;
+}
 .navbar.navigation {
   background-color: #333;
   color: white;
@@ -148,4 +171,21 @@ button {
 .navigation-row:hover {
   background-color: $highlight-color;
   cursor: pointer;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.container-main {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.modal-backdrop.show {
+  z-index: 1000 !important;
+}
+.vh-75 {
+  min-height: 60vh;
+  max-height: 60vh;
 }

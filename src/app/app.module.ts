@@ -6,13 +6,8 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FirebaseService } from './shared/firebase.service';
-import { getFirestore } from 'firebase/firestore';
 import { SharedModule } from './shared/shared.module';
-import { firebaseConfig } from 'src/environment';
 
 @NgModule({
   declarations: [
@@ -27,10 +22,7 @@ import { firebaseConfig } from 'src/environment';
     SharedModule,
     AdminModule
   ],
-  providers: [
-    provideFirebaseApp(() => initializeApp(firebaseConfig)), // Firebase initialization
-    provideFirestore(() => getFirestore()), // Firestore provider
-    ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

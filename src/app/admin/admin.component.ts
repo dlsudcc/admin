@@ -31,6 +31,10 @@ export class AdminComponent implements OnInit {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
+  get isMobile () {
+    return window.innerWidth <= 1023;
+  }
+
   closeSideBar() {
     this.isSidebarOpen = false;
   }

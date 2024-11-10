@@ -2,17 +2,89 @@
 <div class="w-100">
     <nav class="navbar navigation">
         <ul class="m-0 p-0">
-            <li>Module</li>
+            <li>Users</li>
         </ul>
     </nav>
-    <div class="container">
+    <div class="container-main">
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-12">
-                        
+                    <div class="col-12 col-lg-10 mb-2 mt-2">
+                        <input type="text" class="form-control form-control-md" [(ngModel)]="this.listingOption.search" placeholder="Enter Last Name, First Name, Middle Name, Username, Email" (ngModelChange)="onSearchChanged()">
+                    </div>
+                    <div class="col-12 col-lg-2 mt-lg-2">
+                        <button class="btn btn-success pt-1 pb-1 w-100" (click)="addNew()">
+                            <div class="d-flex justify-content-center color-unchange">
+                                <div class="icon-sm plus color-unchange">
+                                <i-lucide name="plus" class="icon-sm d-flex align-items-center"></i-lucide>
+                                </div>
+                                Add New User
+                            </div>
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 vh-75">
+                <div *ngIf="isLoading" class="h-100">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="h-100 admin-loading font-md">
+                        Loading...
+                    </div>
+                </div>
+                <table class="table table-responsive h-100" *ngIf="!isLoading">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let tableHeader of tableHeaders" (click)="sortBy(tableHeader.name)" [class]="tableHeader.class" class="th-sort">
+                                <th-arrow [sortDirection]="this.listingOption.sortDirection" [sort]="this.listingOption.sort" [name]="tableHeader.name" [description]="tableHeader.label"></th-arrow>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="listing-row cursor-pointer" *ngFor="let user of users; let i = index;" (click)="view(user)">
+                            <td>
+                                {{ i+1 }}
+                            </td>
+                            <td>
+                                {{ user.lastName }}
+                            </td>
+                            <td>
+                                {{ user.firstName }}
+                            </td>
+                            <td>
+                                {{ user.middleName }}
+                            </td>
+                            <td>
+                                {{ user.userName }}
+                            </td>
+                            <td>
+                                {{ user.email }}
+                            </td>
+                            <td>
+                                {{ user.createdAt | date }}
+                            </td>
+                        </tr>
+                        <!-- <tr *ngFor="let product of products; let i = index" class="cursor-pointer" (click)="showProduct(product.id)">
+                            <td>{{ i + 1}}</td>
+                            <td>
+                                {{ product.productName }}
+                                <status-labels [type]="ProductStatusLabels[product.status]"></status-labels>
+                            </td>
+                            <td>{{ product.category.name }}</td>
+                            <td>{{ product.merchant.name }}</td>
+                            <td class="text-right">{{ product.price.toString() | number: '1.2-2' }}</td>
+                            <td class="text-right">{{ product.quantity.toString() | number: '1.2-2' }}</td>
+                            <td>{{ product.createdAt | date: 'M-d-YYYY' }}</td>
+                        </tr>
+                        <tr *ngIf="products.length == 0">
+                            <td colspan="9" class="text-center">No result found.</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <pagination *ngIf="listingResult.total.valueOf() > 0 && !isLoading" [totalPages]="listingResult.totalPages" [currentPage]="listingResult.page" (pageChanged)="navigate($event)"></pagination>
             </div>
         </div>
     </div>

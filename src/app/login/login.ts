@@ -32,7 +32,6 @@ export class LoginForm extends FormUtils implements iLogin, iFormRules {
             password: this.password ?? ''
         });
         this.formatErrors(this.form);
-        console.log(this.errors)
         return this.form.valid;
     }
 }

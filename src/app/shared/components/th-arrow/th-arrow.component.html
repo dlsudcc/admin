@@ -1,0 +1,6 @@
+<a class="cursor-pointer primary-highlight-text-color d-flex">
+    {{ description }}
+    <div class="navigation-icon mr-2" *ngIf="sortColumn == name" class="ml-2 fa " [ngClass]="sortDirection == '+' ? 'chevron-up' : 'chevron-down'">
+        <i-lucide [name]="sortDirection == '+' ? 'chevron-up' : 'chevron-down'" class="navigation-icon d-flex align-items-center"></i-lucide>
+    </div>
+</a>

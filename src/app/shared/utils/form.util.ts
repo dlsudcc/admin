@@ -37,6 +37,31 @@ export class FormUtils {
             return true;
         });
     }
+    get otherErrors() {
+        console.log(this.errors);
+        let errors = [];
+        for (const [key, value] of Object.entries(this.errors)) {
+            if (key.includes('otherError')) {
+                errors.push(value);
+            }
+        }
+        return errors;
+    }
+    handleFormError(data: any, dtoErrors: any) {
+        if (data.error.errors) {
+            dtoErrors = {};
+            for (const field in data.error.errors) {
+                if (data.status == 400 && data.error.errors.hasOwnProperty(field)) {
+                    dtoErrors[field] = data.error.errors[field];
+                } else {
+                    console.log (data.error.errors[field]);
+                    dtoErrors['otherError' + field] = data.error.errors[field];
+                }
+            }
+            return dtoErrors;
+        }
+        return {};
+    }
 }
 export class FormItemUtils {
     errors: any = {};

@@ -24,7 +24,6 @@
     "bootstrap": "^4.6.2",
     "bootstrap4-toggle": "^3.6.1",
     "crypto-js": "^4.2.0",
-    "firebase": "^10.14.1",
     "fontawesome-4.7": "^4.7.0",
     "iconoir": "^7.9.0",
     "jquery": "^3.7.1",

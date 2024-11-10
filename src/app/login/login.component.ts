@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { LoadingService } from '../shared/services/loading.service';
 import { AuthService } from '../shared/services/auth.service';
 import { ErrorHandlerService } from '../shared/services/error-handler.service';
-import { FirebaseService } from '../shared/firebase.service';
-import { PasswordUtils } from '../shared/utils/password-util';
 import { ToastService } from '../shared/services/toast.service';
 import { ToastType } from '../shared/components/toast/toast';
 
@@ -20,7 +18,6 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private loadingService: LoadingService,
-    private firebaseService: FirebaseService,
     // private notificationService: NotificationService,
     private errorHandlerService: ErrorHandlerService,
     private toastService: ToastService

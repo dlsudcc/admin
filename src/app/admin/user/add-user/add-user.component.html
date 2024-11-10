@@ -1,0 +1,97 @@
+
+
+<div class="col-12">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-12 p-0" >
+                <h5>New User</h5>
+            </div>
+        </div>
+        <form (ngSubmit)="submitForm()">
+            <div class="row">
+                <div class="col-12 p-0 p-lg-2 col-lg-6">
+                    <div class="form-group mb-1">
+                        <label for="lastName" class="font-sm">Last Name</label>
+                        <input name="lastName" type="text" [class]="form.errors?.lastName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.lastName" placeholder="Last Name">
+                    </div>
+                    <div *ngIf="form.errors?.lastName" class="text-danger">
+                        {{ form.errors?.lastName }}
+                    </div>
+                </div>
+                <div class="col-12 p-0 p-lg-2 col-lg-6">
+                    <div class="form-group mb-1">
+                        <label for="firstName" class="font-sm">First Name</label>
+                        <input name="firstName" type="text" [class]="form.errors?.firstName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.firstName" placeholder="First Name">
+                    </div>
+                    <div *ngIf="form.errors?.firstName" class="text-danger">
+                        {{ form.errors?.firstName }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0 p-lg-2 col-lg-6">
+                    <div class="form-group mb-1">
+                        <label for="middleName" class="font-sm">Middle Name</label>
+                        <input name="middleName" type="text" [class]="form.errors?.middleName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.middleName" placeholder="Middle Name">
+                    </div>
+                    <div *ngIf="form.errors?.middleName" class="text-danger">
+                        {{ form.errors?.middleName }}
+                    </div>
+                </div>
+                <div class="col-12 p-0 p-lg-2 col-lg-6">
+                    <div class="form-group mb-1">
+                        <label for="email" class="font-sm">Email</label>
+                        <input name="email" type="email" [class]="form.errors?.email ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.email" placeholder="Email">
+                    </div>
+                    <div *ngIf="form.errors?.email" class="text-danger">
+                        {{ form.errors?.email }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0 p-lg-2 col-lg-6">
+                    <div class="form-group mb-1">
+                        <label for="userName" class="font-sm">Username</label>
+                        <input name="userName" type="text" [class]="form.errors?.userName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.userName" placeholder="Username">
+                    </div>
+                    <div *ngIf="form.errors?.userName" class="text-danger">
+                        {{ form.errors?.userName }}
+                    </div>
+                </div>
+                <div class="col-12 p-0 p-lg-2 col-lg-6">
+                    <div class="form-group mb-1">
+                        <label for="password" class="font-sm">Password</label>
+                        <input name="password" type="password" [class]="form.errors?.password ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.password" placeholder="Password">
+                    </div>
+                    <div *ngIf="form.errors?.password" class="text-danger">
+                        {{ form.errors?.password }}
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="form.otherErrors.length > 0">
+                <div class="col-12 pl-2">
+                    <div *ngFor="let error of form.otherErrors" class="text-danger">
+                        {{ error }}
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 offset-6 d-flex justify-content-end pr-2">
+                    <button class="btn btn-secondary mr-2 pt-1 pb-1" type="button" (click)="close()" [disabled]="isLoading">
+                        <div class="d-flex justify-content-center color-unchange">
+                            Cancel
+                        </div>
+                    </button>
+                    <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
+                        <div class="d-flex justify-content-center color-unchange">
+                            <div class="icon-sm check color-unchange">
+                            <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
+                            </div>
+                            Save
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

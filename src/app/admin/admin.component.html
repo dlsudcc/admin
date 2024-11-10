@@ -1,5 +1,5 @@
 <div class="container sidebar"[class]="isSidebarOpen ? 'sidebar-main border-main' : 'sidebar-close'">
-    <app-sidebar></app-sidebar>
+    <app-sidebar [isSidebarOpen]="isSidebarOpen"></app-sidebar>
 </div>
 <div class="container sidebar-backdrop" [ngClass]="{'d-none': !isSidebarOpen}" (click)="closeSideBar()"></div>
 <app-header (sidebarToggle)="toggleSidebar()" [isSideBarOpen]='isSidebarOpen'></app-header>
@@ -9,7 +9,7 @@
         <main>
             <div class="container-main">
                 <div class="row" style="margin-right: calc(100%-64px)">
-                    <div [class]="isSidebarOpen ? 'col-sidebar' : ''">
+                    <div *ngIf="!isMobile" [class]="isSidebarOpen ? 'col-sidebar' : ''">
                         <div class="sidebar-main " [class]="isSidebarOpen ? 'sidebar-content-open border-main' : 'sidebar-content-close'">
                             <app-sidebar [isSidebarOpen]="isSidebarOpen"></app-sidebar>
                         </div>

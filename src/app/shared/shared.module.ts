@@ -6,21 +6,38 @@ import { ToastComponent } from './components/toast/toast.component';
 import { LoadingService } from './services/loading.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ThArrowComponent } from './components/th-arrow/th-arrow.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { NullablePipe } from './pipes/nullable.pipe';
 
 @NgModule({
   declarations: [
     LoadingComponent,
-    ToastComponent
+    ToastComponent,
+    ThArrowComponent,
+    PaginationComponent,
+    NullablePipe
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule, 
+    HttpClientModule,
     LucideAngularModule.pick(icons),
   ],
   exports: [
     LucideAngularModule,
+    HttpClientModule,
     LoadingComponent,
     ToastComponent,
     CommonModule,
+    FormsModule,
+    PaginationComponent,
+    ReactiveFormsModule,
+    ThArrowComponent,
+    NullablePipe
   ],
   providers: [
     LoadingService

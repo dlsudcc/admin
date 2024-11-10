@@ -1,0 +1,14 @@
+<div class="pagination">
+    Page {{ currentPage }} of {{ totalPages }}
+</div>
+<div class="pagination col-md-6 offset-md-6 justify-content-end mb-4 pr-0">
+  <div>
+      <button class="btn border mr-1" *ngIf="!availablePages.includes(1)" (click)="changePage(1)">{{ 1 }}</button>
+  </div>
+  <div *ngFor="let page of availablePages">
+    <button class="btn border" [ngClass]="{'bg-main-btn' : page == currentPage}" (click)="changePage(page)">{{ page }}</button>
+  </div>
+  <div>
+    <button class="btn border ml-1" *ngIf="!availablePages.includes(totalPages.valueOf())" (click)="changePage(totalPages.valueOf())">{{ totalPages }}</button>
+  </div>
+</div>

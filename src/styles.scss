@@ -70,7 +70,7 @@ button {
   button:not(.no-animation):hover {
     color: $dark-link-color-hover !important;
   }
-  body, div:not(.sidebar-main, .color-unchange), main, app-header, app-admin {
+  body, div:not(.sidebar-main, .color-unchange, .modal-dialog), main, app-header, app-admin {
       background-color: $dark-bg-color;
       color: $dark-text-color;
   }
@@ -83,6 +83,7 @@ button {
   }
   a:hover {
     color: $dark-link-color-hover !important;
+    background-color: $dark-header-bg !important;
     text-decoration: none !important;
   }
   

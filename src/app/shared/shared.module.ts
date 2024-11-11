@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ThArrowComponent } from './components/th-arrow/th-arrow.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { NullablePipe } from './pipes/nullable.pipe';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NullablePipe } from './pipes/nullable.pipe';
     ToastComponent,
     ThArrowComponent,
     PaginationComponent,
-    NullablePipe
+    NullablePipe,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,

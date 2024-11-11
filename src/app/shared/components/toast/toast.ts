@@ -22,7 +22,7 @@ export class ToastDTO implements iToast {
             case ToastType.SUCCESS:
                 return 'bg-success text-white';
             case ToastType.ERROR:
-                return 'bg-danger';
+                return 'bg-danger text-white';
             default: 
                 return'bg-warning';
         }

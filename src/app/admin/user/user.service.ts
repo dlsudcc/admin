@@ -26,6 +26,9 @@ export class UserService extends ApiService {
   updateUser(id: Number, form: UserForm) {
     return this.putRequest('user_update/'+id, form);
   }
+  delete(id: Number) {
+    return this.deleteRequest('user_delete/'+id);
+  }
   show(id: Number) {
     return this.getRequest('user_show/'+id);
   }

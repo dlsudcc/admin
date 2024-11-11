@@ -1,0 +1,28 @@
+<div class="col-12">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-12 p-0" >
+                <h5>Confirmation</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 p-0" >
+                {{ message }}
+            </div>
+        </div>
+        <div class="row mt-2 mb-2">
+            <ng-container *ngIf="type == ConfirmationDialogTypes.YESNO">
+                <div class="col-6 d-flex justify-content-center">
+                    <button type="button" (click)="respond(ConfirmationResponseType.YES)" class="btn w-100 btn-success">
+                        Yes
+                    </button>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                    <button type="button" (click)="respond(ConfirmationResponseType.NO)" class="btn w-100 btn-secondary">
+                        No
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

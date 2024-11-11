@@ -39,6 +39,9 @@ export class ApiService {
   postRequest(endPoint:string, payload: any) {
       return this.httpClient.post(environment.apiUrl+endPoint,JSON.stringify(payload), {headers: this.headers, params: this.params});
   }
+  deleteRequest(endPoint:string) {
+      return this.httpClient.delete(environment.apiUrl+endPoint);
+  }
   putRequest(endPoint:string, payload: any) {
       return this.httpClient.put(environment.apiUrl+endPoint,JSON.stringify(payload), {headers: this.headers, params: this.params});
   }

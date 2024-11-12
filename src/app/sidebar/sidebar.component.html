@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row navigation-row cursor-pointer" *ngFor="let navigation of navigations">
-        <div class="col-sidebar text-white" [class]="!isSidebarOpen ? '' : 'd-flex'" [routerLink]="navigation.link">
+        <div class="col-sidebar text-white" [class]="!isSidebarOpen ? '' : 'd-flex'" (click)="navigateTo(navigation.link)">
             <div class="navigation-icon mr-2" [class]="navigation.icon">
                 <i-lucide [name]="navigation.name" class="navigation-icon d-flex align-items-center"></i-lucide>
             </div>

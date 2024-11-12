@@ -37,21 +37,18 @@ export class LoginComponent {
       this.loadingService.hide();
       this.router.navigate(['admin']);
     } else {
-      if (this.form.valid()) {
-        try {
-          const result = await this.authService.login(this.form);
+      
+      this.authService.login(this.form).subscribe({
+        next: (result) => {
+          this.authService.setCookie('user', result);
           this.loadingService.hide();
           this.toastService.add("Success", "Login Successful", ToastType.SUCCESS);
           this.router.navigate(['admin']);
-          // Handle successful login (e.g., navigate to another page)
-        } catch (error) {
+        }, error: (result) => {
           this.loadingService.hide();
-          this.form.addError('form', 'Invalid credentials');
-          // Display an error message to the user
+          this.form.errors = this.form.handleFormError(result, this.form);
         }
-      } else {
-        this.loadingService.hide();
-      }
+      });
       // this.firebaseService.add(this.form, "users").then(result=> {
 
       // });

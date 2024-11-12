@@ -39,7 +39,7 @@
                     <thead>
                         <tr>
                             <th *ngFor="let tableHeader of tableHeaders" (click)="sortBy(tableHeader.name)" [class]="tableHeader.class" class="th-sort">
-                                <th-arrow [sortDirection]="this.listingOption.sortDirection" [sort]="this.listingOption.sort" [name]="tableHeader.name" [description]="tableHeader.label"></th-arrow>
+                                <app-th-arrow [sortDirection]="this.listingOption.sortDirection" [sort]="this.listingOption.sort" [name]="tableHeader.name" [description]="tableHeader.label"></app-th-arrow>
                             </th>
                         </tr>
                     </thead>
@@ -84,7 +84,7 @@
                         </tr> -->
                     </tbody>
                 </table>
-                <pagination *ngIf="listingResult.total.valueOf() > 0 && !isLoading" [totalPages]="listingResult.totalPages" [currentPage]="listingResult.page" (pageChanged)="navigate($event)"></pagination>
+                <app-pagination *ngIf="listingResult.total.valueOf() > 0 && !isLoading" [totalPages]="listingResult.totalPages" [currentPage]="listingResult.page" (pageChanged)="navigate($event)"></app-pagination>
             </div>
         </div>
     </div>

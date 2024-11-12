@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { UserDTO, UserForm } from './user';
-import { map, Observable } from 'rxjs';
+import { UserForm } from './user';
 import { UserListingOption } from './user-listing-options';
 
 @Injectable({
@@ -23,13 +22,13 @@ export class UserService extends ApiService {
   addUser(form: UserForm) {
     return this.postRequest('user_new', form);
   }
-  updateUser(id: Number, form: UserForm) {
+  updateUser(id: number, form: UserForm) {
     return this.putRequest('user_update/'+id, form);
   }
-  delete(id: Number) {
+  delete(id: number) {
     return this.deleteRequest('user_delete/'+id);
   }
-  show(id: Number) {
+  show(id: number) {
     return this.getRequest('user_show/'+id);
   }
 }

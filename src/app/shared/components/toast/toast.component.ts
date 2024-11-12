@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ToastService } from '../../services/toast.service';
 import { ToastDTO } from './toast';
 
@@ -15,8 +15,8 @@ export class ToastComponent {
       if (toast) {
         this.toasts.push(toast);
         const interval = setInterval(() => {
-          toast.timeLeft! -= 10; // Decrease time left by 100ms
-          if (toast.timeLeft! <= 0) {
+          toast.timeLeft -= 10; // Decrease time left by 100ms
+          if (toast.timeLeft <= 0) {
             clearInterval(interval);
             this.remove(this.toasts.indexOf(toast)); // Remove the toast when time runs out
           }

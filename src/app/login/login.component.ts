@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginForm } from './login';
 import { Router } from '@angular/router';
 import { LoadingService } from '../shared/services/loading.service';
@@ -12,7 +12,7 @@ import { ToastType } from '../shared/components/toast/toast';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: LoginForm = new LoginForm();
   constructor(
     private authService: AuthService,

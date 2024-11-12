@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row mt-2 mb-2">
-            <ng-container *ngIf="type == ConfirmationDialogTypes.YESNO">
+            <ng-container *ngIf="type === ConfirmationDialogTypes.YESNO">
                 <div class="col-6 d-flex justify-content-center">
                     <button type="button" (click)="respond(ConfirmationResponseType.YES)" class="btn w-100 btn-success">
                         Yes

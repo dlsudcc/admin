@@ -9,7 +9,7 @@ export interface iUser {
     createdAt: Date;
     userName: string;
     password: string;
-    id: Number;
+    id: number;
     email: string;
 }
 export class UserDTO implements iUser {
@@ -20,17 +20,17 @@ export class UserDTO implements iUser {
     createdAt: Date;
     userName: string;
     password: string;
-    id: Number;
+    id: number;
     email: string;
     
     userMapper(data) {
-        let userMapper = new Mapper<iUser, UserDTO>((users: UserDTO): UserDTO => {
+        const userMapper = new Mapper<iUser, UserDTO>((users: UserDTO): UserDTO => {
             return users;
         })
         return userMapper.map(data);
     }
     usersMapper(data) {
-        let userMapper = new Mapper<iUser[], UserDTO[]>((users: UserDTO[]): UserDTO[] => {
+        const userMapper = new Mapper<iUser[], UserDTO[]>((users: UserDTO[]): UserDTO[] => {
             return users;
         })
         return userMapper.map(data);
@@ -44,7 +44,7 @@ export class UserForm extends FormUtils {
     createdAt: Date;
     userName: string;
     password: string;
-    id: Number;
+    id: number;
     email: string;
     fill (data: UserDTO) {
         this.firstName = data.firstName;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemeService } from './shared/theme.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ThemeService } from './shared/theme.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isDarkMode = false;
 
   constructor(private themeService: ThemeService) {}

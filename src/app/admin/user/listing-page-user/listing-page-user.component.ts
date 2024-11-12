@@ -68,6 +68,7 @@ export class ListingPageUserComponent implements OnInit {
         this.loadContent();
       }
     }).catch((error) => {
+      console.error(error);
     });
   }
   async navigate(page) {

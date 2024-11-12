@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastComponent } from '../shared/components/toast/toast.component';
+import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../shared/services/toast.service';
-import { ToastType } from '../shared/components/toast/toast';
 import { AuthService } from '../shared/services/auth.service';
 import { LoadingService } from '../shared/services/loading.service';
 

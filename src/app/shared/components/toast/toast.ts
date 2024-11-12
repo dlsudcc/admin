@@ -16,7 +16,7 @@ export class ToastDTO implements iToast {
     message: string;
     type: ToastType;
     duration?: number;
-    timeLeft?: number;
+    timeLeft = 0;
     get class() {
         switch(this.type) {
             case ToastType.SUCCESS:

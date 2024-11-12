@@ -10,7 +10,7 @@ body {
 
 .sidebar-backdrop {
   background: black;
-  min-height: 100vh;
+  height: 103.4vh;
   min-width: 100vw;
   opacity: .7;
   z-index: 1029;
@@ -39,6 +39,11 @@ body {
 
   .sidebar.show {
     display: block !important;
+  }
+  .container-fluid {
+    max-height: 90vh;
+    overflow: scroll;
+    
   }
 }
 @media (min-width: 1024px) {
@@ -80,6 +85,9 @@ body {
   max-width: 400px;
   margin: 20px auto;
   text-align: center;
+}
+.sidebar {
+  margin: 0px;
 }
 
 input {

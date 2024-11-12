@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,17 @@ export class ApiService {
   public queryParams = '';
   constructor(
       private httpClient: HttpClient, 
+      public cookieService: CookieService
   ) {
+  }
+  verifyAuth () {
+    return !!this.cookieService.get('user');
+  }
+  async logOut() {
+    this.cookieService.delete('user');
+  }
+  setCookie(field, value) {
+    this.cookieService.set(field, value);
   }
   setParameters(parameters): ApiService {
     this.queryParams = '';

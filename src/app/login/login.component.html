@@ -7,17 +7,17 @@
                 <form (submit)="onSubmit()">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email or Username</label>
-                        <input [class]="form.errors?.email || form.errors?.email ? 'border border-danger' : ''" [(ngModel)]="form.email" name="email" type="text" class="form-control" placeholder="Enter email or username">
+                        <input [class]="form.getError('email') || form.getError('email') ? 'border border-danger' : ''" [(ngModel)]="form.email" name="email" type="text" class="form-control" placeholder="Enter email or username">
                     
-                        <div *ngIf="form.errors?.email" class="text-danger">
-                            {{ form.errors?.email }}
+                        <div *ngIf="form.getError('email')" class="text-danger">
+                            {{ form.getError('email') }}
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input [class]="form.errors?.password || form.errors?.password ? 'border border-danger' : ''" [(ngModel)]="form.password" name="password" type="password" class="form-control" placeholder="Password">
-                        <div *ngIf="form.errors?.password" class="text-danger">
-                            {{ form.errors?.password }}
+                        <input [class]="form.getError('password') || form.getError('password') ? 'border border-danger' : ''" [(ngModel)]="form.password" name="password" type="password" class="form-control" placeholder="Password">
+                        <div *ngIf="form.getError('password')" class="text-danger">
+                            {{ form.getError('password') }}
                         </div>
                     </div>
                     <div class="row" *ngIf="form.otherErrors.length > 0">

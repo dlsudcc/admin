@@ -4,8 +4,6 @@ import { LucideAngularModule, icons } from 'lucide-angular';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { LoadingService } from './services/loading.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ThArrowComponent } from './components/th-arrow/th-arrow.component';

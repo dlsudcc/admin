@@ -12,19 +12,19 @@
                 <div class="col-12 p-0 p-lg-2 col-lg-6">
                     <div class="form-group mb-1">
                         <label for="lastName" class="font-sm">Last Name</label>
-                        <input name="lastName" type="text" [class]="form.errors?.lastName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.lastName" placeholder="Last Name">
+                        <input name="lastName" type="text" [class]="form.getError('lastName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.lastName" placeholder="Last Name">
                     </div>
-                    <div *ngIf="form.errors?.lastName" class="text-danger">
-                        {{ form.errors?.lastName }}
+                    <div *ngIf="form.getError('lastName')" class="text-danger">
+                        {{ form.getError('lastName') }}
                     </div>
                 </div>
                 <div class="col-12 p-0 p-lg-2 col-lg-6">
                     <div class="form-group mb-1">
                         <label for="firstName" class="font-sm">First Name</label>
-                        <input name="firstName" type="text" [class]="form.errors?.firstName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.firstName" placeholder="First Name">
+                        <input name="firstName" type="text" [class]="form.getError('firstName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.firstName" placeholder="First Name">
                     </div>
-                    <div *ngIf="form.errors?.firstName" class="text-danger">
-                        {{ form.errors?.firstName }}
+                    <div *ngIf="form.getError('firstName')" class="text-danger">
+                        {{ form.getError('firstName') }}
                     </div>
                 </div>
             </div>
@@ -32,19 +32,19 @@
                 <div class="col-12 p-0 p-lg-2 col-lg-6">
                     <div class="form-group mb-1">
                         <label for="middleName" class="font-sm">Middle Name</label>
-                        <input name="middleName" type="text" [class]="form.errors?.middleName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.middleName" placeholder="Middle Name">
+                        <input name="middleName" type="text" [class]="form.getError('middleName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.middleName" placeholder="Middle Name">
                     </div>
-                    <div *ngIf="form.errors?.middleName" class="text-danger">
-                        {{ form.errors?.middleName }}
+                    <div *ngIf="form.getError('middleName')" class="text-danger">
+                        {{ form.getError('middleName') }}
                     </div>
                 </div>
                 <div class="col-12 p-0 p-lg-2 col-lg-6">
                     <div class="form-group mb-1">
                         <label for="email" class="font-sm">Email</label>
-                        <input name="email" type="email" [class]="form.errors?.email ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.email" placeholder="Email">
+                        <input name="email" type="email" [class]="form.getError('email') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.email" placeholder="Email">
                     </div>
-                    <div *ngIf="form.errors?.email" class="text-danger">
-                        {{ form.errors?.email }}
+                    <div *ngIf="form.getError('email')" class="text-danger">
+                        {{ form.getError('email') }}
                     </div>
                 </div>
             </div>
@@ -52,19 +52,19 @@
                 <div class="col-12 p-0 p-lg-2 col-lg-6">
                     <div class="form-group mb-1">
                         <label for="userName" class="font-sm">Username</label>
-                        <input name="userName" type="text" [class]="form.errors?.userName ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.userName" placeholder="Username">
+                        <input name="userName" type="text" [class]="form.getError('userName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.userName" placeholder="Username">
                     </div>
-                    <div *ngIf="form.errors?.userName" class="text-danger">
-                        {{ form.errors?.userName }}
+                    <div *ngIf="form.getError('userName')" class="text-danger">
+                        {{ form.getError('userName') }}
                     </div>
                 </div>
                 <div class="col-12 p-0 p-lg-2 col-lg-6">
                     <div class="form-group mb-1">
                         <label for="password" class="font-sm">Password</label>
-                        <input name="password" type="password" [class]="form.errors?.password ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.password" placeholder="Password">
+                        <input name="password" type="password" [class]="form.getError('password') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.password" placeholder="Password">
                     </div>
-                    <div *ngIf="form.errors?.password" class="text-danger">
-                        {{ form.errors?.password }}
+                    <div *ngIf="form.getError('password')" class="text-danger">
+                        {{ form.getError('password') }}
                     </div>
                 </div>
             </div>

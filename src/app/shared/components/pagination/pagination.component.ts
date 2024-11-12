@@ -1,20 +1,20 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'pagination',
+  selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent {
   @Input() result;
-  @Input() currentPage : Number;
-  @Input() totalPages : Number;
+  @Input() currentPage : number;
+  @Input() totalPages : number;
   @Output() pageChanged: EventEmitter<number> = new EventEmitter();
   get availablePages(): number[] {
     const maxPagesToShow = 5;
     const totalPagesToShow = Math.min(this.totalPages.valueOf(), maxPagesToShow);
     const firstPage = Math.max(1, this.currentPage.valueOf() - Math.floor(maxPagesToShow / 2));
-    const lastPage = Math.min(this.totalPages.valueOf(), firstPage + maxPagesToShow - 1);
+    // const lastPage = Math.min(this.totalPages.valueOf(), firstPage + maxPagesToShow - 1);
     return Array.from({ length: totalPagesToShow }, (_, i) => firstPage + i);
   }
 

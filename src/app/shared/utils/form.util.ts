@@ -1,9 +1,12 @@
 import { FormGroup } from "@angular/forms";
-
+export class Error {
+    field: string;
+    error: string;
+}
 export class FormUtils {
-    errors: any = [];
+    errors: Error[] = [];
     getError(fieldName) {
-        return this.errors.find(it=>it.field == fieldName)?.error
+        return this.errors[fieldName];
     }
     private formatControlName(controlName: string): string {
         return controlName.charAt(0).toUpperCase() + controlName.slice(1).replace(/([A-Z])/g, ' $1');
@@ -38,7 +41,7 @@ export class FormUtils {
         });
     }
     get otherErrors() {
-        let errors = [];
+        const errors = [];
         for (const [key, value] of Object.entries(this.errors)) {
             if (key.includes('otherError')) {
                 errors.push(value);
@@ -46,12 +49,12 @@ export class FormUtils {
         }
         return errors;
     }
-    handleFormError(data: any, dtoErrors: any) {
+    handleFormError(data, dtoErrors) {
         console.log(data);
         if (data.error.errors) {
             dtoErrors = {};
             for (const field in data.error.errors) {
-                if (data.status == 400 && data.error.errors.hasOwnProperty(field)) {
+                if (data.status == 400 && data.error.errors[field]) {
                     dtoErrors[field] = data.error.errors[field];
                 } else {
                     dtoErrors['otherError' + field] = data.error.errors[field];
@@ -64,7 +67,7 @@ export class FormUtils {
     }
 }
 export class FormItemUtils {
-    errors: any = {};
+    errors = {};
 }
 export interface iFormRules {
     valid();

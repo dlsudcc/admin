@@ -47,13 +47,13 @@ export class ApiService {
   getRequest(endPoint:string) {
       return this.httpClient.get(environment.apiUrl+endPoint+(this.queryParams ? '?'+this.queryParams:''), {headers: this.headers, params: this.params});
   }
-  postRequest(endPoint:string, payload: any) {
+  postRequest(endPoint:string, payload) {
       return this.httpClient.post(environment.apiUrl+endPoint,JSON.stringify(payload), {headers: this.headers, params: this.params});
   }
   deleteRequest(endPoint:string) {
       return this.httpClient.delete(environment.apiUrl+endPoint);
   }
-  putRequest(endPoint:string, payload: any) {
+  putRequest(endPoint:string, payload) {
       return this.httpClient.put(environment.apiUrl+endPoint,JSON.stringify(payload), {headers: this.headers, params: this.params});
   }
 }

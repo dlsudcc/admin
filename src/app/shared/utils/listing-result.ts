@@ -1,7 +1,7 @@
 export class ListingResult {
     data: [];
-    limit: Number;
-    page: Number;
-    total: Number = 0;
-    totalPages: Number;
+    limit: number;
+    page: number;
+    total = 0;
+    totalPages: number;
 }

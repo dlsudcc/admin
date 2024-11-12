@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ToastDTO, ToastType } from '../components/toast/toast';
 import { CONFIG_TOASTDURATION_SECONDS } from 'src/environment';
 

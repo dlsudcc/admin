@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserDTO, UserForm } from '../user';
+import { UserDTO } from '../user';
 import { UserService } from '../user.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +16,7 @@ import { ToastType } from 'src/app/shared/components/toast/toast';
   styleUrls: ['./show-page-user.component.scss']
 })
 export class ShowPageUserComponent implements OnInit {
-  id: Number;
+  id: number;
   user: UserDTO;
   isLoading = false;
   constructor(
@@ -32,7 +32,7 @@ export class ShowPageUserComponent implements OnInit {
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.id) {
-
+      console.log("SD");
     }
     this.loadContent();
   }
@@ -63,7 +63,6 @@ export class ShowPageUserComponent implements OnInit {
       if (result) {
         this.loadContent();
       }
-    }).catch((error) => {
     });
   }
   delete() {
@@ -77,10 +76,9 @@ export class ShowPageUserComponent implements OnInit {
     modalRef.componentInstance.message = "Are you sure you want to delete?";
     modalRef.componentInstance.type = ConfirmationDialogTypes.YESNO;
     modalRef.result.then((result) => {
-      console.log(result);
       if (result == ConfirmationResponseTypes.YES) {
         this.isLoading = true;
-        this.userService.delete(this.user.id).subscribe({next:(result)=> {
+        this.userService.delete(this.user.id).subscribe({next:()=> {
           this.toastService.add("Success", "User Deleted", ToastType.ERROR);
           this.isLoading = false;
           this.router.navigate(['user']);
@@ -88,7 +86,6 @@ export class ShowPageUserComponent implements OnInit {
           this.isLoading = false;
         }});
       }
-    }).catch((error) => {
     });
   }
 }

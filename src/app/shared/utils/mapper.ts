@@ -10,9 +10,9 @@ export class Mapper<TFrom, TTo> {
   }
 
   entityMapper(data) {
-    let entityMapper = new Mapper<any, any>((entity: any): any => {
-        return entity;
-    })
+    const entityMapper = new Mapper<TFrom, TTo>((entity: TFrom): TTo => {
+      return entity as unknown as TTo; // type casting to match the return type
+    });
     return entityMapper.map(data);
   }
 }

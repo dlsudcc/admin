@@ -1,0 +1,10 @@
+<div class="dropdown">
+    <label [class]="labelClass" class="font-weight-bold">{{ label }}</label>
+    <input type="text" class="form-control" [class]="error ? 'border-danger': ''" [disabled]="disabled" placeholder="Enter {{ label }}" [(ngModel)]="searchText" (ngModelChange)="onSearchTextChanged()">
+  
+    <ul class="list-group mt-2 position-absolute w-100" *ngIf="filteredData.length">
+        <li *ngFor="let item of filteredData" class="list-group-item highlight-on-hover cursor-pointer" (click)="onSelect(item)">
+        {{ item[field] }}
+        </li>
+    </ul>
+</div>

@@ -11,6 +11,10 @@ export class ApiService {
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
+  private multipartHeader = new HttpHeaders({
+    'enctype': 'multipart/form-data'
+  });
+  
   private params = new HttpParams();
   public queryParams = '';
   constructor(
@@ -27,33 +31,36 @@ export class ApiService {
   setCookie(field, value) {
     this.cookieService.set(field, value);
   }
-  setParameters(parameters): ApiService {
+  setParameters(parameters, setQueryParams = false): ApiService {
     this.queryParams = '';
     this.params = new HttpParams();
     for (const [key, value] of Object.entries(parameters)) {
         this.params.set(key, JSON.stringify(value));
-        if (value) {
+        if (value && setQueryParams) {
             this.queryParams += key+"="+value+"&";
         }
     }
-    console.log(this.queryParams);
     return this;
-}
-  setHeaders(headers = []) {
-    for (const [key, value] of Object.entries(headers)) {
-        this.headers.append(key, value);
-    }
+  }
+  get apiUrl() {
+    return environment.apiUrl;
   }
   getRequest(endPoint:string) {
       return this.httpClient.get(environment.apiUrl+endPoint+(this.queryParams ? '?'+this.queryParams:''), {headers: this.headers, params: this.params});
   }
   postRequest(endPoint:string, payload) {
-      return this.httpClient.post(environment.apiUrl+endPoint,JSON.stringify(payload), {headers: this.headers, params: this.params});
+      return this.httpClient.post(environment.apiUrl+endPoint, JSON.stringify(payload), {headers: this.headers, params: this.params});
+  }
+  uploadPostRequest(endPoint:string, payload) {
+      return this.httpClient.post(environment.apiUrl+endPoint, payload, {headers: this.multipartHeader, params: this.params});
   }
   deleteRequest(endPoint:string) {
       return this.httpClient.delete(environment.apiUrl+endPoint);
   }
   putRequest(endPoint:string, payload) {
       return this.httpClient.put(environment.apiUrl+endPoint,JSON.stringify(payload), {headers: this.headers, params: this.params});
+  }
+  download(location) {
+    window.open(`${environment.apiUrl}${location}`, '_blank');
   }
 }

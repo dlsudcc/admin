@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserDTO } from '../user';
+import { UserDTO, UserForm } from '../user';
 import { UserService } from '../user.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -32,7 +32,9 @@ export class ShowPageUserComponent implements OnInit {
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.id) {
-      console.log("SD");
+      this.toastService.add("Error", "This user is not viewable", ToastType.ERROR);
+      this.router.navigate(['404']);
+      return;
     }
     this.loadContent();
   }
@@ -44,6 +46,14 @@ export class ShowPageUserComponent implements OnInit {
         next: (result) => {
           this.user = new UserDTO();
           this.user = this.user.userMapper(result);
+        },
+        error: (error) => {
+          const form = new UserForm();
+          form.errors = form.handleFormError(error, form);
+          form.otherErrors.forEach(it => {
+            this.toastService.add("Error", it, ToastType.ERROR)
+          })
+          this.router.navigate(['404']);
         },
         complete: () => {
           this.loadingService.hide();

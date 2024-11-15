@@ -50,7 +50,9 @@ export class ShowPageStudentComponent implements OnInit {
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.id) {
-      console.log("SD");
+      this.toastService.add("Error", "This student is not viewable", ToastType.ERROR);
+      this.router.navigate(['404']);
+      return;
     }
     this.loadContent();
   }
@@ -124,6 +126,14 @@ export class ShowPageStudentComponent implements OnInit {
         next: (result) => {
           this.student = new StudentDTO();
           this.student = this.student.studentMapper(result);
+        },
+        error: (error) => {
+          const form = new StudentForm();
+          form.errors = form.handleFormError(error, form);
+          form.otherErrors.forEach(it => {
+            this.toastService.add("Error", it, ToastType.ERROR)
+          })
+          this.router.navigate(['404']);
         },
         complete: () => {
           this.loadingService.hide();

@@ -70,5 +70,5 @@ export class FormItemUtils {
     errors = {};
 }
 export interface iFormRules {
-    valid();
+    fill (object);
 }

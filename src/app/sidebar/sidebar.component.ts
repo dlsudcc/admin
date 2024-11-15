@@ -11,7 +11,7 @@ export class SidebarComponent {
   constructor(private router: Router) {}
   navigations = [
     {name: 'users', icon: 'users', link: 'admin/user', description: 'Users'},
-    {name: 'graduation-cap', icon: 'graduation-cap', link: 'admin/students', description: 'Students'}
+    {name: 'graduation-cap', icon: 'graduation-cap', link: 'admin/student', description: 'Students'}
   ];
   navigateTo(link: string) {
     this.router.navigate([link]);

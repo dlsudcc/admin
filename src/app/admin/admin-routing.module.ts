@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { Page404Component } from './page404/page404.component';
 
 const routes: Routes = [
   {
@@ -13,8 +14,24 @@ const routes: Routes = [
         path: 'user', 
         loadChildren: () => import('./user/user.module').then(m => m.UserModule)
       },
+      { 
+        path: 'student', 
+        loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
+      },
+      { 
+        path: 'student-document', 
+        loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
+      }, {
+        path: '**', component: Page404Component
+      }
     ]
-  }, 
+  }, {
+    path: '404',
+    component: Page404Component
+  }, {
+    path: '**', component: Page404Component
+  }
+
 ];
 
 @NgModule({

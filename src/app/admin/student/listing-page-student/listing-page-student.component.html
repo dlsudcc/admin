@@ -1,0 +1,195 @@
+
+<div class="w-100">
+    <nav class="navbar navigation">
+        <ul class="m-0 p-0">
+            <li>Students</li>
+        </ul>
+    </nav>
+    <div class="container-main">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-lg-10 mb-2 mt-2">
+                        <input type="text" class="form-control form-control-md" [(ngModel)]="this.listingOption.search" placeholder="Enter Last Name, First Name, Middle Name, Department" (ngModelChange)="onSearchChanged()">
+                    </div>
+                    <div class="col-12 col-lg-2 mt-lg-2">
+                        <button class="btn btn-success pt-1 pb-1 w-100" (click)="addNew()">
+                            <div class="d-flex justify-content-center color-unchange">
+                                <div class="icon-sm plus color-unchange">
+                                <i-lucide name="plus" class="icon-sm d-flex align-items-center"></i-lucide>
+                                </div>
+                                Add New Student
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-white pt-1">
+            <div class="col-12">
+                <div class="primary-highlight-text-color cursor-pointer d-flex align-items-center" (click)="toggleFilter()">{{ filter ? 'Hide filters ' : 'Show filters ' }}
+                    <span class="cursor-pointer">
+                        <div class="icon-sm color-unchange" [class]="filter? 'chevron-up' : 'chevron-down'">
+                            <i-lucide [name]="filter? 'chevron-up' : 'chevron-down'"class="icon-sm d-flex align-items-center"></i-lucide>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-white pt-1" *ngIf="filter">
+            <div class="col-12 col-md-4">
+                <div class="form-group mb-0">
+                    <app-dropdown 
+                        [data]="years" 
+                        (formModelChange)="selectYear($event)"
+                        [field]="'year'"
+                        [clearAfterSelect]="true"
+                        [label]="'Year'"
+                        [labelClass]="'form-label'"
+                        (userSearchedText)="searchYears($event)">
+                    </app-dropdown>
+                </div>
+                <div class="d-flex mt-1">
+                    <span *ngFor="let year of listingOption.years" class="p-1 mr-1 d-flex bg-secondary text-white border-rounded font-sm">{{ year.year }}
+                        <span (click)="removeYear(year)" class="cursor-pointer">
+                            <div class="icon-sm x color-unchange">
+                                <i-lucide name="x" class="icon-sm d-flex align-items-center"></i-lucide>
+                            </div>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="form-group mb-0">
+                    <app-dropdown 
+                        [data]="departments" 
+                        (formModelChange)="selectDepartment($event)"
+                        [field]="'description'"
+                        [clearAfterSelect]="true"
+                        [label]="'Department'"
+                        [labelClass]="'form-label'"
+                        (userSearchedText)="searchDepartments($event)">
+                    </app-dropdown>
+                </div>
+                <div class="d-flex mt-1">
+                    <span *ngFor="let department of listingOption.departments" class="p-1 mr-1 d-flex bg-secondary text-white border-rounded font-sm">{{department.description}}
+                        <span (click)="removeDepartment(department)" class="cursor-pointer">
+                            <div class="icon-sm x color-unchange">
+                                <i-lucide name="x" class="icon-sm d-flex align-items-center"></i-lucide>
+                            </div>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="form-group">
+                  <label for="status"><strong>Status</strong></label>
+                  <select class="form-control" (change)="loadContent()" [(ngModel)]="listingOption.status">
+                    <option [value]="StudentStatus.ALL">Select Status</option>
+                    <option [value]="StudentStatus.FORVERIFICATION">{{ StudentStatusLabels[StudentStatus.FORVERIFICATION] }}</option>
+                    <option [value]="StudentStatus.INACTIVE">{{ StudentStatusLabels[StudentStatus.INACTIVE] }}</option>
+                    <option [value]="StudentStatus.VERIFIED">{{ StudentStatusLabels[StudentStatus.VERIFIED] }}</option>
+                  </select>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-white pt-1" *ngIf="filter">
+            <div class="col-12 col-md-4">
+                <div class="form-group mb-0">
+                    <app-dropdown 
+                        [data]="barangays" 
+                        (formModelChange)="selectBarangay($event)"
+                        [field]="'barangay'"
+                        [clearAfterSelect]="true"
+                        [label]="'Barangay'"
+                        [labelClass]="'form-label'"
+                        (userSearchedText)="searchBarangays($event)">
+                    </app-dropdown>
+                </div>
+                <div class="d-flex mt-1">
+                    <span *ngFor="let barangay of listingOption.barangays" class="p-1 mr-1 d-flex bg-secondary text-white border-rounded font-sm">{{barangay.barangay}}
+                        <span (click)="removeBarangay(barangay)" class="cursor-pointer">
+                            <div class="icon-sm x color-unchange">
+                                <i-lucide name="x" class="icon-sm d-flex align-items-center"></i-lucide>
+                            </div>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 vh-75">
+                <div *ngIf="isLoading" class="h-100 mt-2">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="h-100 admin-loading font-md">
+                        Loading...
+                    </div>
+                </div>
+                <table class="table table-responsive h-100" *ngIf="!isLoading">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let tableHeader of tableHeaders" (click)="sortBy(tableHeader.name)" [class]="tableHeader.class" class="th-sort">
+                                <app-th-arrow [sortDirection]="this.listingOption.sortDirection" [sort]="this.listingOption.sort" [name]="tableHeader.name" [description]="tableHeader.label"></app-th-arrow>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="students.length === 0">
+                            <td [attr.colspan]="tableHeaders.length">
+                                No result found.
+                            </td>
+                        </tr>
+                        <tr class="listing-row cursor-pointer" *ngFor="let student of students; let i = index;" (click)="view(student)">
+                            <td>
+                                {{ i+1 }}
+                            </td>
+                            <td>
+                                {{ student.lastName }}
+                                <app-status-labels [entity]="'StudentStatus'" [status]="student.status"></app-status-labels>
+                            </td>
+                            <td>
+                                {{ student.firstName }}
+                            </td>
+                            <td>
+                                {{ student.middleName }}
+                            </td>
+                            <td>
+                                {{ student.year }}
+                            </td>
+                            <td>
+                                {{ student.department.description }}
+                            </td>
+                            <td>
+                                {{ student.homeAddress.barangay }}
+                            </td>
+                            <td>
+                                {{ student.section.name }}
+                            </td>
+                            <td>
+                                {{ student.createdAt | date }}
+                            </td>
+                        </tr>
+                        <!-- <tr *ngFor="let product of products; let i = index" class="cursor-pointer" (click)="showProduct(product.id)">
+                            <td>{{ i + 1}}</td>
+                            <td>
+                                {{ product.productName }}
+                                <status-labels [type]="ProductStatusLabels[product.status]"></status-labels>
+                            </td>
+                            <td>{{ product.category.name }}</td>
+                            <td>{{ product.merchant.name }}</td>
+                            <td class="text-right">{{ product.price.toString() | number: '1.2-2' }}</td>
+                            <td class="text-right">{{ product.quantity.toString() | number: '1.2-2' }}</td>
+                            <td>{{ product.createdAt | date: 'M-d-YYYY' }}</td>
+                        </tr>
+                        <tr *ngIf="products.length == 0">
+                            <td colspan="9" class="text-center">No result found.</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <app-pagination *ngIf="listingResult.total.valueOf() > 0 && !isLoading" [totalPages]="listingResult.totalPages" [currentPage]="listingResult.page" (pageChanged)="navigate($event)"></app-pagination>
+            </div>
+        </div>
+    </div>
+</div>

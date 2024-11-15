@@ -10,6 +10,8 @@ import { ThArrowComponent } from './components/th-arrow/th-arrow.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { NullablePipe } from './pipes/nullable.pipe';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { StatusLabelsComponent } from './componenets/status-labels/status-labels.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     ThArrowComponent,
     PaginationComponent,
     NullablePipe,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DropdownComponent,
+    StatusLabelsComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +41,9 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     PaginationComponent,
     ReactiveFormsModule,
     ThArrowComponent,
-    NullablePipe
+    NullablePipe,
+    DropdownComponent,
+    StatusLabelsComponent
   ],
   providers: [
     LoadingService

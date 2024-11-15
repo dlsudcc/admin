@@ -6,6 +6,7 @@ import { HeaderComponent } from '../header/header.component';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
+import { Page404Component } from './page404/page404.component';
 
 
 
@@ -14,7 +15,8 @@ import { AdminRoutingModule } from './admin-routing.module';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    AdminComponent
+    AdminComponent,
+    Page404Component
   ],
   imports: [
     CommonModule,

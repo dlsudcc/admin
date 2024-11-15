@@ -31,6 +31,10 @@ $dark-btn-text: #f8f9fa;
 .border-main {
   border-right: 1px solid gray;
 }
+
+.highlight-on-hover:hover {
+  background-color: $light-link-color-hover;
+}
 .sidebar-main {
   background-color: $dark-bg-color;
 }
@@ -175,6 +179,20 @@ button {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.font-sm {
+  font-size: 10px;
+}
+.container-content {
+  
+  max-height: 92vh;
+  overflow: scroll;
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari
+  }
 }
 .container-main {
   width: 100%;

@@ -1,0 +1,64 @@
+
+
+<div class="col-12">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-12 p-0" >
+                <h5>Update Document</h5>
+            </div>
+        </div>
+        <form (ngSubmit)="submitForm()">
+            <div class="row">
+                <div class="col-12 p-0 p-lg-2">
+                    <div class="form-group">
+                      <label for="status"><strong>Type</strong></label>
+                      <select class="form-control" [(ngModel)]="form.type" name="type">
+                        <option [value]="DocumentType.NONE">Select Document Type</option>
+                        <option [value]="DocumentType.BIRTHCERTIFICATE">{{DocumentTypeLabels[DocumentType.BIRTHCERTIFICATE]}}</option>
+                        <option [value]="DocumentType.ID">{{DocumentTypeLabels[DocumentType.ID]}}</option>
+                        <option [value]="DocumentType.OTHER">{{DocumentTypeLabels[DocumentType.OTHER]}}</option>
+                      </select>
+                    </div>
+                    <div *ngIf="form.getError('type')" class="text-danger">
+                        {{ form.getError('type') }}
+                    </div>
+                    <div class="form-group mb-1" *ngIf="form.type === DocumentType.OTHER" name="otherType">
+                        <label for="otherType"><strong>Other Type</strong></label>
+                        <input name="otherType" type="text" [class]="form.getError('otherType') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.otherType" placeholder="Specify Type">
+                    </div>
+                    <div *ngIf="form.getError('otherType')" class="text-danger">
+                        {{ form.getError('otherType') }}
+                    </div>
+                    <div class="file-drop-zone">
+                        <label for="status"><strong>File Name</strong></label><br>
+                        {{ form.originalFileName }}
+                    </div>
+                    <div class="form-group mb-1 mt-1">
+                        <label for="remarks"><strong>Remarks</strong></label>
+                        <textarea class="w-100 mt-1" [(ngModel)]="form.remarks" rows="5" cols="40" name="remarks"></textarea>
+                    </div>
+                    <div *ngIf="form.getError('remarks')" class="text-danger">
+                        {{ form.getError('remarks') }}
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 offset-6 d-flex justify-content-end pr-lg-2">
+                    <button class="btn btn-secondary mr-2 pt-1 pb-1" type="button" (click)="close()" [disabled]="isLoading">
+                        <div class="d-flex justify-content-center color-unchange">
+                            Cancel
+                        </div>
+                    </button>
+                    <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
+                        <div class="d-flex justify-content-center color-unchange">
+                            <div class="icon-sm check color-unchange">
+                                <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
+                            </div>
+                            Save
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

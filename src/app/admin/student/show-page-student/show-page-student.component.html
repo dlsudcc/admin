@@ -1,0 +1,315 @@
+
+<div class="w-100">
+    <nav class="navbar navigation">
+        <ul class="m-0 p-0">
+            <li class="cursor-pointer" [routerLink]="'../../student'">Students</li>
+            <li>
+                <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+                    <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
+                </div>
+            </li>
+            <li *ngIf="student" class="highlight-color">
+                {{ student.firstName + " " + student.lastName }}
+                <app-status-labels [entity]="'StudentStatus'" [status]="student.status"></app-status-labels>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="container" *ngIf="student">
+    <div class="row mt-2" *ngIf="student.canVerify">
+        <div class="col-12 d-flex justify-content-end">
+            <div class="dropdown pr-0 pl-2 cursor-pointer">
+                <a
+                    class="nav-link primary-text-color p-0"
+                    href="#"
+                    role="button"
+                    id="updateStatus"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    <div class="d-flex align-items-center">
+                        Status 
+                        <div class="icon chevron-down mr-2 color-unchange">
+                            <i-lucide name="chevron-down" class="icon d-flex align-items-center"></i-lucide>
+                        </div> 
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right p-0 cursor-pointer " aria-labelledby="updateStatus">
+                    <a class="dropdown-item d-flex align-items-center" *ngIf="student.canVerify" (click)="verify()">
+                        <div class="icon check mr-2 color-unchange text-info">
+                            <i-lucide name="check" class="icon d-flex align-items-center"></i-lucide>
+                        </div>
+                        <div class="color-unchange text-info">Set as Verified</div>
+                    </a>
+                    <!-- <a class="dropdown-item d-flex align-items-center cursor-pointer" (click)="delete()">
+                        <div class="icon trash  mr-2  color-unchange text-danger">
+                            <i-lucide name="trash" class="icon d-flex align-items-center"></i-lucide>
+                        </div>
+                        <div class="color-unchange text-danger">Delete</div>
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col col-lg-4 font-md">
+            <h5>Basic Information</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <img [src]="apiUrl + student.profilePicture" width="100">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Last Name</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.lastName }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">First Name</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.lastName }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Middle Name</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.middleName | nullable }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Email</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.authentication.email }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Blood Type</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.bloodType }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-4 font-md">
+            <h5>Academic Information</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Department</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.department.description }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Section</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.section.name }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Year</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.year }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-4 font-md">
+            <h5>Home Address</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">House No.</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.houseNumber }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Street/Village</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.streetVillage }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Barangay</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.barangay }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">City/Municipality</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.cityMunicipality }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Province</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.province }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Region</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.region }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Zipcode</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.homeAddress.zipCode }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-4 font-md">
+            <h5>Permanent Address</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">House No.</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.houseNumber }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Street/Village</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.streetVillage }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Barangay</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.barangay }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">City/Municipality</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.cityMunicipality }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Province</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.province }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Region</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.region }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Zipcode</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{student.permanentAddress.zipCode }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-6 col-lg-4 font-md">
+            <h5>Verification Information</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <button class="btn btn-success" (click)="addDocument()">
+                <div class="icon plus mr-2 ml-0 color-unchange">
+                    <i-lucide name="plus" class="icon d-flex align-items-center"></i-lucide>
+                </div>
+                <div class="color-unchange"></div>
+            </button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table table-responsive h-100" *ngIf="!isLoading">
+                <thead>
+                    <tr>
+                        <th *ngFor="let tableHeader of tableHeaders" [class]="tableHeader.class" class="th-sort">
+                            {{ tableHeader.label }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="student.documents.length === 0">
+                        <td [attr.colspan]="tableHeaders.length">
+                            No result found.
+                        </td>
+                    </tr>
+                    <tr class="listing-row cursor-pointer" *ngFor="let document of student.documents; let i = index;">
+                        <td>
+                            {{ i+1 }}
+                        </td>
+                        <td>
+                            {{ DocumentTypeLabels[document.type] + (document.type === DocumentType.OTHER ? ':' + document.otherType : '') }}
+                        </td>
+                        <td>
+                            {{ document.remarks }}
+                        </td>
+                        <td>
+                            <button class="btn btn-info color-unchange" (click)="viewDocument(document)">
+                                <div class="d-flex justify-content-center color-unchange">
+                                    <div class="icon-sm download color-unchange">
+                                    <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="btn ml-1 btn-warning color-unchange" (click)="updateDocument(document)">
+                                <div class="d-flex justify-content-center color-unchange">
+                                    <div class="icon-sm pencil color-unchange">
+                                    <i-lucide name="pencil" class="icon-sm d-flex align-items-center"></i-lucide>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="btn ml-1 btn-danger color-unchange" (click)="deleteDocument(document)">
+                                <div class="d-flex justify-content-center color-unchange">
+                                    <div class="icon-sm trash color-unchange">
+                                    <i-lucide name="trash" class="icon-sm d-flex align-items-center"></i-lucide>
+                                    </div>
+                                </div>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- <tr *ngFor="let product of products; let i = index" class="cursor-pointer" (click)="showProduct(product.id)">
+                        <td>{{ i + 1}}</td>
+                        <td>
+                            {{ product.productName }}
+                            <status-labels [type]="ProductStatusLabels[product.status]"></status-labels>
+                        </td>
+                        <td>{{ product.category.name }}</td>
+                        <td>{{ product.merchant.name }}</td>
+                        <td class="text-right">{{ product.price.toString() | number: '1.2-2' }}</td>
+                        <td class="text-right">{{ product.quantity.toString() | number: '1.2-2' }}</td>
+                        <td>{{ product.createdAt | date: 'M-d-YYYY' }}</td>
+                    </tr>
+                    <tr *ngIf="products.length == 0">
+                        <td colspan="9" class="text-center">No result found.</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

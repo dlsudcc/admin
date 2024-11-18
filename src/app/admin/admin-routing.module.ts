@@ -19,6 +19,10 @@ const routes: Routes = [
         loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
       },
       { 
+        path: 'driver', 
+        loadChildren: () => import('./driver/driver.module').then(m => m.DriverModule)
+      },
+      { 
         path: 'student-document', 
         loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
       }, {

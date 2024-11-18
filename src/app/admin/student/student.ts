@@ -34,6 +34,9 @@ export interface iStudent {
     lastName: string;
     firstName: string;
     middleName: string;
+    nationality: string;
+    name: string;
+    sex: string;
     profilePicture: string;
     birthDate: Date;
     bloodType: BloodType;
@@ -54,6 +57,8 @@ export class StudentDTO implements iStudent {
     id: number;
     lastName: string;
     firstName: string;
+    nationality: string;
+    sex: string;
     middleName: string;
     profilePicture: string;
     documents: DocumentDTO[] = [];
@@ -70,7 +75,7 @@ export class StudentDTO implements iStudent {
     authentication: AuthFragment;
     createdAt: Date;
     isEnrolledAsDriver: boolean;
-    
+    name: string;
     studentMapper(data) {
         const studentMapper = new Mapper<iStudent, StudentDTO>((students: StudentDTO): StudentDTO => {
             return students;
@@ -93,6 +98,8 @@ export class StudentForm extends FormUtils implements iStudent, iFormRules {
     canVerify: boolean;
     birthDate: Date;
     bloodType: BloodType;
+    nationality: string;
+    sex: string;
     department: DepartmentFragment;
     section: SectionFragment;
     documents: DocumentDTO[] = [];
@@ -104,6 +111,9 @@ export class StudentForm extends FormUtils implements iStudent, iFormRules {
     authentication: AuthFragment;
     createdAt: Date;
     isEnrolledAsDriver: boolean;
+    get name () {
+       return this.lastName + " " + this.firstName + " " + this.middleName;
+    }
     fill (student: StudentDTO) {
         this.id = student?.id;
         this.lastName = student?.lastName;
@@ -118,6 +128,8 @@ export class StudentForm extends FormUtils implements iStudent, iFormRules {
         this.homeAddress = student?.homeAddress;
         this.permanentAddress = student?.permanentAddress;
         this.isPermanentAddressSame = student?.isPermanentAddressSame;
+        this.nationality = student?.nationality;
+        this.sex = student?.sex;
         this.status = student?.status;
         this.authentication = student?.authentication;
         this.createdAt = student?.createdAt;

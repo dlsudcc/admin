@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DriverStatusLabels, DriverStatusLabelsClass } from 'src/app/admin/driver/driver';
 import { StudentStatus, StudentStatusLabels, StudentStatusLabelsClass } from 'src/app/admin/student/student';
 
 @Component({
@@ -11,6 +12,7 @@ export class StatusLabelsComponent implements OnInit {
   @Input() status;
   entities = {
     StudentStatus:{statusLabels: StudentStatusLabels, statusLabelClass: StudentStatusLabelsClass},
+    DriverStatus:{statusLabels: DriverStatusLabels, statusLabelClass: DriverStatusLabelsClass},
   };
   ngOnInit() {
     if (!this.entities[this.entity]) {

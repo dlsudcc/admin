@@ -1,38 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentListingOption } from '../student-listing-option';
-import { ListingResult } from 'src/app/shared/utils/listing-result';
-import { debounceTime, Subject } from 'rxjs';
-import { BloodType, StudentDTO, StudentStatus, StudentStatusLabels } from '../student';
-import { StudentService } from '../student.service';
+import { DriverService } from '../driver.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { DepartmentDTO } from '../../department/department';
+import { debounceTime, Subject } from 'rxjs';
+import { ListingResult } from 'src/app/shared/utils/listing-result';
+import { DriverListingOption } from '../driver-listing-options';
+import { DriverDTO, DriverStatus, DriverStatusLabels } from '../driver';
+import { BloodType } from '../../student/student';
 import { SectionDTO } from '../../section/section';
+import { DepartmentDTO } from '../../department/department';
 
 @Component({
-  selector: 'app-listing-page-student',
-  templateUrl: './listing-page-student.component.html',
-  styleUrls: ['./listing-page-student.component.scss']
+  selector: 'app-listing-page-driver',
+  templateUrl: './listing-page-driver.component.html',
+  styleUrls: ['./listing-page-driver.component.scss']
 })
-export class ListingPageStudentComponent implements OnInit {
-  listingOption: StudentListingOption = new StudentListingOption();
+export class ListingPageDriverComponent implements OnInit {
+  listingOption: DriverListingOption = new DriverListingOption();
   listingResult: ListingResult = new ListingResult();
   private searchTextChanged = new Subject<string>(); // Subject to handle search text changes
-  StudentStatus = StudentStatus;
-  StudentStatusLabels = StudentStatusLabels;
+  DriverStatus = DriverStatus;
   isDropdownLoading = false;
-  students: StudentDTO [] = [];
+  DriverStatusLabels = DriverStatusLabels;
+  drivers: DriverDTO[] = [];
+  driver = new DriverDTO();
+  filter = true;
+  years = [];
   departments: DepartmentDTO [] = [];
   department: DepartmentDTO = new DepartmentDTO();
-  years = [];
   bloodTypes: BloodType [] = [];
   sections: SectionDTO [] = [];
   barangays = [];
   cities: [] = [];
   provinces: [] = [];
   regions: [] = [];
-  isEnrolledAsDriver: boolean;
-  filter = true;
-  student = new StudentDTO();
   tableHeaders = [
     { name: '', label: '', class:"" },
     { name: 'lastName', label: 'Last Name', class:"col-2" },
@@ -46,7 +47,8 @@ export class ListingPageStudentComponent implements OnInit {
   ]
   isLoading = false;
   constructor(
-    private studentService: StudentService,
+    private driverService: DriverService,
+    private modalService: NgbModal,
     private route: Router
   ) {
   }
@@ -61,7 +63,40 @@ export class ListingPageStudentComponent implements OnInit {
   toggleFilter() {
     this.filter = !this.filter;
   }
+  loadContent() {
+    this.isLoading = true;
+    this.driverService.drivers(this.listingOption).subscribe({
+      next: (result: ListingResult) => {
+        this.drivers = this.driver.driversMapper(result.data);
+        this.listingResult = result;
+      }, complete: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+  onSearchChanged(): void {
+    this.searchTextChanged.next(this.listingOption.search);
+  }
+  addNew () {
+    this.route.navigate(['admin/driver/new'])
+  }
+  async navigate(page) {
+    this.listingOption.page = page;
+    this.loadContent();
+  }
+  sortBy (name) {
+    if (this.listingOption.sort) {
+      this.listingOption.sort = (this.listingOption.sort[0] == '-' ? '+' : '-') + name;
+    } else {
+      this.listingOption.sort = '+' + name;
+    }
+    this.loadContent();
+  }
+  view (driver: DriverDTO) {
+    this.route.navigate(['admin/driver/'+driver.id]);
+  }
   selectDepartment(department) {
+    console.log(department);
     this.listingOption.departments.push(department);
     this.departments = [];
     this.loadContent();
@@ -69,7 +104,7 @@ export class ListingPageStudentComponent implements OnInit {
   searchDepartments(department: string) {
     this.departments = [];
     this.isDropdownLoading = true;
-    this.studentService.departments({
+    this.driverService.departments({
       department: department,
       exclude: this.listingOption?.departments.length > 0 ? this.listingOption.departments?.map(it=>it.id) : null
     }).subscribe({
@@ -91,7 +126,7 @@ export class ListingPageStudentComponent implements OnInit {
   searchYears(year: string) {
     this.years = [];
     this.isDropdownLoading = true;
-    this.studentService.years({
+    this.driverService.years({
       year: year,
       exclude: this.listingOption?.years.length > 0 ? this.listingOption.years?.map(it=>it.year) : null
     }).subscribe({
@@ -113,7 +148,7 @@ export class ListingPageStudentComponent implements OnInit {
   searchBarangays(barangay: string) {
     this.years = [];
     this.isDropdownLoading = true;
-    this.studentService.barangays({
+    this.driverService.barangays({
       barangay: barangay,
       exclude: this.listingOption?.barangays.length > 0 ? this.listingOption.barangays?.map(it=>it.barangay) : null
     }).subscribe({
@@ -126,37 +161,5 @@ export class ListingPageStudentComponent implements OnInit {
   removeBarangay(barangay) {
     this.listingOption.barangays = this.listingOption.barangays.filter (it => it.barangay != barangay.barangay);
     this.loadContent();
-  }
-  loadContent() {
-    this.isLoading = true;
-    this.studentService.students(this.listingOption).subscribe({
-      next: (result: ListingResult) => {
-        this.students = this.student.studentsMapper(result.data);
-        this.listingResult = result;
-      }, complete: () => {
-        this.isLoading = false;
-      }
-    });
-  }
-  onSearchChanged(): void {
-    this.searchTextChanged.next(this.listingOption.search);
-  }
-  addNew () {
-    this.route.navigate(['new']);
-  }
-  async navigate(page) {
-    this.listingOption.page = page;
-    this.loadContent();
-  }
-  sortBy (name) {
-    if (this.listingOption.sort) {
-      this.listingOption.sort = (this.listingOption.sort[0] == '-' ? '+' : '-') + name;
-    } else {
-      this.listingOption.sort = '+' + name;
-    }
-    this.loadContent();
-  }
-  view (student: StudentDTO) {
-    this.route.navigate(['admin/student/'+student.id]);
   }
 }

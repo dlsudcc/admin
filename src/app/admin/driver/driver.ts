@@ -10,8 +10,12 @@ export interface iDriver {
     licenseNumber: string;
     documents: DocumentDTO[];
     agencyCode: string;
+    canUpdate: boolean;
+    canVerify: boolean;
+    canDisable: boolean;
+    licenseExpirationDate: Date;
     restrictions: RestrictionDTO [];
-    conditions: ConditionDTO[];
+    // conditions: ConditionDTO[];
     weight: number;
     height: number;
 }
@@ -23,7 +27,7 @@ export class RestrictionDTO implements iRestriction {
     id: string;
     description: string;
     isSelected = false;
-    
+
     restrictionMapper(data) {
         const restrictionMapper = new Mapper<iRestriction, RestrictionDTO>((restriction: RestrictionDTO): RestrictionDTO => {
             return restriction;
@@ -63,13 +67,17 @@ export class DriverDTO implements iDriver {
     id: number;
     student: StudentDTO;
     status: DriverStatus;
+    canVerify: boolean;
+    canDisable: boolean;
     licenseNumber: string;
+    licenseExpirationDate: Date;
     documents: DocumentDTO[];
     agencyCode: string;
     restrictions: RestrictionDTO [];
-    conditions: ConditionDTO [];
+    // conditions: ConditionDTO [];
     weight: number;
     height: number;
+    canUpdate: boolean;
     driverMapper(data) {
         const driverMapper = new Mapper<iDriver, DriverDTO>((driver: DriverDTO): DriverDTO => {
             return driver;
@@ -87,16 +95,23 @@ export class DriverForm extends FormUtils implements iDriver {
     id: number;
     student: StudentDTO;
     status: DriverStatus;
+    canVerify: boolean;
+    canUpdate: boolean;
+    canDisable: boolean;
     licenseNumber: string;
+    licenseExpirationDate: Date;
     agencyCode: string;
     restrictions: RestrictionDTO [];
-    conditions: ConditionDTO [];
-    documents: DocumentDTO[];
+    // conditions: ConditionDTO [];
+    documents: DocumentDTO[] = [];
     weight: number;
     height: number;
     // updateRestrictions(restriction: RestrictionDTO) {
     //     this.res
     // }
+    get selectedRestrictions() {
+      return this.restrictions.filter(it => it.isSelected);
+    }
     fill(driver: DriverDTO) {
         this.id = driver?.id;
         this.status = driver?.status;
@@ -104,8 +119,29 @@ export class DriverForm extends FormUtils implements iDriver {
         this.agencyCode = driver?.agencyCode;
         this.student = driver?.student;
         this.restrictions = driver?.restrictions;
-        this.conditions = driver?.conditions;
+        // this.conditions = driver?.conditions;
+        this.licenseExpirationDate = driver?.licenseExpirationDate;
         this.weight = driver?.weight;
         this.height = driver?.height;
+    }
+    updateDocument (document: DocumentDTO) {
+      let index = this.documents.findIndex(it => it.id === document.id);
+      if (index !== -1) {
+        this.documents.splice(index, 1, document); // Replace the object at the index
+      }
+    }
+    toSubmit() {
+      return {
+        id: this.id,
+        restrictions: this.selectedRestrictions.map(it => it.id),
+        documents: this.documents.map(it=>it.id),
+        height: this.height,
+        weight: this.weight,
+        licenseExpirationDate: this.licenseExpirationDate,
+        student: this.student?.id,
+        // conditions: this.conditions,
+        agencyCode: this.agencyCode,
+        licenseNumber: this.licenseNumber
+      }
     }
 }

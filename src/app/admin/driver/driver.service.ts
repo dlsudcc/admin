@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { DriverListingOption } from './driver-listing-options';
+import { DriverForm } from './driver';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class DriverService extends ApiService {
       },true
     )
     return this.getRequest('drivers');
+  }
+
+  addDriver(form: DriverForm) {
+    return this.postRequest('driver_new', form.toSubmit());
   }
   departments(params) {
     this.setParameters(params, true);
@@ -37,5 +42,14 @@ export class DriverService extends ApiService {
   }
   get profilePictureUrl() {
     return this.apiUrl;
+  }
+  show(id: number) {
+    return this.getRequest('driver_show/'+id);
+  }
+  verify(id: number) {
+    return this.putRequest('driver_verify/'+id, null);
+  }
+  delete(id: number) {
+    return this.deleteRequest('driver_delete/'+id);
   }
 }

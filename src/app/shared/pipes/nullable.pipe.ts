@@ -6,8 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NullablePipe implements PipeTransform {
 
   transform(value): string {
-    // Check if value is null or undefined
-    return value == null ? '--' : value;
+    return value == null || !value || value == undefined ? '--' : value;
   }
 
 }

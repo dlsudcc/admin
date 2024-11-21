@@ -1,6 +1,7 @@
 import { FormUtils } from "src/app/shared/utils/form.util";
 import { Mapper } from "src/app/shared/utils/mapper";
 import { StudentDTO } from "../student/student";
+import { DriverDTO } from "../driver/driver";
 
 export interface iDocument {
     id: number;
@@ -11,6 +12,7 @@ export interface iDocument {
     otherType: string;
     student: StudentDTO;
     location: string;
+    driver: DriverDTO;
 }
 export class DocumentDTO {
     id: number;
@@ -22,7 +24,8 @@ export class DocumentDTO {
     location: string;
     student: StudentDTO;
     createdAt: Date;
-    
+    driver: DriverDTO;
+
     documentMapper(data) {
         const documentMapper = new Mapper<iDocument, DocumentDTO>((student: DocumentDTO): DocumentDTO => {
             return student;
@@ -37,7 +40,7 @@ export class DocumentDTO {
     }
 }
 export class DocumentForm extends FormUtils implements iDocument {
-    
+
     id: number;
     type: DocumentType = DocumentType.NONE;
     otherType = '';
@@ -47,6 +50,7 @@ export class DocumentForm extends FormUtils implements iDocument {
     location: string;
     remarks: string;
     student: StudentDTO;
+    driver: DriverDTO;
     fill (document: DocumentDTO) {
         this.id = document?.id;
         this.type = document?.type;
@@ -55,6 +59,7 @@ export class DocumentForm extends FormUtils implements iDocument {
         this.remarks = document?.remarks;
         this.originalFileName = document?.originalFileName;
         this.student = document?.student;
+        this.driver = document?.driver;
     }
 }
 export class DocumentFragment {

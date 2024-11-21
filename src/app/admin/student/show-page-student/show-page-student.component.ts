@@ -42,7 +42,7 @@ export class ShowPageStudentComponent implements OnInit {
     private toastService: ToastService,
     private modalService: NgbModal
   ) {
-    
+
   }
   get apiUrl() {
     return this.studentService.profilePictureUrl;
@@ -81,8 +81,8 @@ export class ShowPageStudentComponent implements OnInit {
     this.documentService.download(document.location);
   }
   deleteDocument(document: DocumentDTO) {
-    const modalRef = this.modalService.open(ConfirmationDialogComponent, { 
-      backdrop: 'static',  
+    const modalRef = this.modalService.open(ConfirmationDialogComponent, {
+      backdrop: 'static',
       keyboard: false,
       size: 'md',
       centered: true,
@@ -103,8 +103,8 @@ export class ShowPageStudentComponent implements OnInit {
     });
   }
   addDocument() {
-    const modalRef = this.modalService.open(AddDocumentComponent, { 
-      backdrop: 'static',  
+    const modalRef = this.modalService.open(AddDocumentComponent, {
+      backdrop: 'static',
       keyboard: true,
       animation: false
     });
@@ -146,8 +146,8 @@ export class ShowPageStudentComponent implements OnInit {
     console.log("SD");
   }
   updateDocument(document: DocumentDTO) {
-    const modalRef = this.modalService.open(UpdateDocumentComponent, { 
-      backdrop: 'static',  
+    const modalRef = this.modalService.open(UpdateDocumentComponent, {
+      backdrop: 'static',
       keyboard: true,
       animation: false
     });
@@ -163,8 +163,8 @@ export class ShowPageStudentComponent implements OnInit {
     });
   }
   delete() {
-    const modalRef = this.modalService.open(ConfirmationDialogComponent, { 
-      backdrop: 'static',  
+    const modalRef = this.modalService.open(ConfirmationDialogComponent, {
+      backdrop: 'static',
       keyboard: false,
       size: 'md',
       centered: true,

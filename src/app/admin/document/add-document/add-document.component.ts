@@ -85,7 +85,7 @@ export class AddDocumentComponent {
 
   submitForm() {
     this.isLoading = true;
-    const api = this.isStudent ? this.documentService.addStudentDocument(this.form) : this.documentService.addStudentDocument(this.form); 
+    const api = this.isStudent ? this.documentService.addStudentDocument(this.form) : this.documentService.addDriverDocument(this.form);
     api.subscribe(
       {
         next: (result) => {

@@ -1,0 +1,10 @@
+.no-spin::-webkit-outer-spin-button,
+.no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide spin buttons for Firefox */
+.no-spin {
+  -moz-appearance: textfield;
+}

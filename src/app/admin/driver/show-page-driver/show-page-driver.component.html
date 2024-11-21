@@ -1,0 +1,323 @@
+
+<div class="w-100">
+  <nav class="navbar navigation">
+    <ul class="m-0 p-0">
+      <li class="cursor-pointer" [routerLink]="'../../driver'">Drivers</li>
+      <li>
+        <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+          <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
+        </div>
+      </li>
+      <li *ngIf="driver" class="highlight-color">
+        {{ driver.student.firstName + " " + driver.student.lastName }}
+        <app-status-labels [entity]="'DriverStatus'" [status]="driver.status"></app-status-labels>
+      </li>
+    </ul>
+  </nav>
+  <div class="container" *ngIf="driver">
+    <div class="row mt-3">
+      <div class="col-12 d-flex justify-content-end" *ngIf="driver.canUpdate || driver.canVerify">
+        <div class="dropdown pr-0 pl-2 cursor-pointer">
+          <a
+            class="nav-link primary-text-color p-0"
+            href="#"
+            role="button"
+            id="updateStatus"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <div class="d-flex align-items-center">
+              Status
+              <div class="icon chevron-down mr-2 color-unchange">
+                <i-lucide name="chevron-down" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right p-0 cursor-pointer " aria-labelledby="updateStatus">
+            <a class="dropdown-item d-flex align-items-center cursor-pointer" *ngIf="driver.canVerify" (click)="verify()">
+              <div class="icon check  mr-2  color-unchange text-info">
+                <i-lucide name="check" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+              <div class="color-unchange text-success">Verify</div>
+            </a>
+            <a class="dropdown-item d-flex align-items-center" (click)="update()" *ngIf="driver.canUpdate">
+              <div class="icon pencil mr-2 color-unchange text-warning">
+                <i-lucide name="pencil" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+              <div class="color-unchange text-warning">Update</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Last Name</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.lastName }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">First Name</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.lastName }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Middle Name</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.middleName | nullable }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Email</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.authentication.email }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Username</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.authentication.username }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Date Created</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{driver.student?.createdAt | date }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-4 font-md">
+            <h5>Academic Information</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Department</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.department.description }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Section</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.section.name }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Year</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.year }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-4 font-md">
+            <h5>Home Address</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">House No.</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.houseNumber }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Street/Village</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.streetVillage }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Barangay</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.barangay }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">City/Municipality</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.cityMunicipality }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Province</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.province }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Region</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.region }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Zipcode</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.homeAddress.zipCode }}</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-4 font-md">
+            <h5>Permanent Address</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">House No.</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.permanentAddress.houseNumber }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Street/Village</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.permanentAddress.streetVillage }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Barangay</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.permanentAddress.barangay }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">City/Municipality</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.permanentAddress.cityMunicipality }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Province</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ driver.student?.permanentAddress.province }}</span>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">Region</label>
+          <div class="d-flex align-items-center">
+              <span class="fs-5">{{ driver.student?.permanentAddress.region }}</span>
+          </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">Zipcode</label>
+        <div class="d-flex align-items-center">
+            <span class="fs-5">{{ driver.student?.permanentAddress.zipCode }}</span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+      <div class="col-6 col-lg-4 font-md">
+          <h5>License Information</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">License Number</label>
+        <div class="d-flex align-items-center">
+            <span class="fs-5">{{ driver.licenseNumber }}</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">Agency Code</label>
+        <div class="d-flex align-items-center">
+            <span class="fs-5">{{ driver.agencyCode }}</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">Restrictions</label>
+        <div class="row">
+            <div class="col-2" *ngFor="let restriction of driver.restrictions; let i = index;">
+                <div class="form-check form-check-sm mr-4"  >
+                    <input [name]="'restriction' + [i]" class="form-check-input" type="checkbox" checked disabled>
+                    <label class="form-check-label">
+                        {{restriction.id}}
+                    </label>
+                    <ng-container *ngIf="i > 4">
+                        <br>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">Height</label>
+        <div class="d-flex align-items-center">
+            <span class="fs-5">{{ driver.height }}</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">Weight</label>
+        <div class="d-flex align-items-center">
+            <span class="fs-5">{{ driver.weight }}</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-bold text-muted">License Expiration Date</label>
+        <div class="d-flex align-items-center">
+            <span class="fs-5">{{ driver.licenseExpirationDate }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-6 col-lg-4 font-md">
+        <h5>Verification Information</h5>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
+        <table class="table table-responsive h-100">
+          <thead>
+            <tr>
+              <th *ngFor="let tableHeader of tableHeaders" [class]="tableHeader.class" class="th-sort">
+                  {{ tableHeader.label }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="listing-row cursor-pointer" *ngFor="let document of driver.documents; let i = index;">
+              <td>
+                  {{ i+1 }}
+              </td>
+              <td>
+                  {{ DocumentTypeLabels[document.type] + (document.type === DocumentType.OTHER ? ':' + document.otherType : '') }}
+              </td>
+              <td>
+                  {{ document.remarks | nullable }}
+              </td>
+              <td>
+                <button class="btn btn-info color-unchange" type="button" (click)="viewDocument(document)">
+                  <div class="d-flex justify-content-center color-unchange">
+                    <div class="icon-sm download color-unchange">
+                      <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
+                    </div>
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

@@ -2,7 +2,7 @@
 <div class="w-100">
     <nav class="navbar navigation">
         <ul class="m-0 p-0">
-            <li>Students</li>
+            <li>Drivers</li>
         </ul>
     </nav>
     <div class="container-main">
@@ -18,7 +18,7 @@
                                 <div class="icon-sm plus color-unchange">
                                 <i-lucide name="plus" class="icon-sm d-flex align-items-center"></i-lucide>
                                 </div>
-                                Add New Student
+                                Add New Driver
                             </div>
                         </button>
                     </div>
@@ -43,8 +43,8 @@
                         [data]="years" 
                         (formModelChange)="selectYear($event)"
                         [field]="'year'"
-                        [isLoading]="isDropdownLoading"
                         [clearAfterSelect]="true"
+                        [isLoading]="isDropdownLoading"
                         [label]="'Year'"
                         [labelClass]="'form-label'"
                         (userSearchedText)="searchYears($event)">
@@ -87,10 +87,10 @@
                 <div class="form-group">
                   <label for="status"><strong>Status</strong></label>
                   <select class="form-control" (change)="loadContent()" [(ngModel)]="listingOption.status">
-                    <option [value]="StudentStatus.ALL">Select Status</option>
-                    <option [value]="StudentStatus.FORVERIFICATION">{{ StudentStatusLabels[StudentStatus.FORVERIFICATION] }}</option>
-                    <option [value]="StudentStatus.INACTIVE">{{ StudentStatusLabels[StudentStatus.INACTIVE] }}</option>
-                    <option [value]="StudentStatus.VERIFIED">{{ StudentStatusLabels[StudentStatus.VERIFIED] }}</option>
+                    <option [value]="DriverStatus.ALL">Select Status</option>
+                    <option [value]="DriverStatus.FORVERIFICATION">{{ DriverStatusLabels[DriverStatus.FORVERIFICATION] }}</option>
+                    <option [value]="DriverStatus.INACTIVE">{{ DriverStatusLabels[DriverStatus.INACTIVE] }}</option>
+                    <option [value]="DriverStatus.VERIFIED">{{ DriverStatusLabels[DriverStatus.VERIFIED] }}</option>
                   </select>
                 </div>
             </div>
@@ -100,9 +100,9 @@
                 <div class="form-group mb-0">
                     <app-dropdown 
                         [data]="barangays" 
+                        [isLoading]="isDropdownLoading"
                         (formModelChange)="selectBarangay($event)"
                         [field]="'barangay'"
-                        [isLoading]="isDropdownLoading"
                         [clearAfterSelect]="true"
                         [label]="'Barangay'"
                         [labelClass]="'form-label'"
@@ -139,39 +139,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngIf="students.length === 0">
+                        <tr *ngIf="drivers.length === 0">
                             <td [attr.colspan]="tableHeaders.length">
                                 No result found.
                             </td>
                         </tr>
-                        <tr class="listing-row cursor-pointer" *ngFor="let student of students; let i = index;" (click)="view(student)">
+                        <tr class="listing-row cursor-pointer" *ngFor="let driver of drivers; let i = index;" (click)="view(driver)">
                             <td>
                                 {{ i+1 }}
                             </td>
                             <td>
-                                {{ student.lastName }}
-                                <app-status-labels [entity]="'StudentStatus'" [status]="student.status"></app-status-labels>
+                                {{ driver.student.lastName }}
+                                <app-status-labels [entity]="'DriverStatus'" [status]="driver.status"></app-status-labels>
                             </td>
                             <td>
-                                {{ student.firstName }}
+                                {{ driver.student.firstName }}
                             </td>
                             <td>
-                                {{ student.middleName }}
+                                {{ driver.student.middleName }}
                             </td>
                             <td>
-                                {{ student.year }}
+                                {{ driver.student.year }}
                             </td>
                             <td>
-                                {{ student.department.description }}
+                                {{ driver.student.department.description }}
                             </td>
                             <td>
-                                {{ student.homeAddress.barangay }}
+                                {{ driver.student.homeAddress.barangay }}
                             </td>
                             <td>
-                                {{ student.section.name }}
+                                {{ driver.student.section.name }}
                             </td>
                             <td>
-                                {{ student.createdAt | date }}
+                                {{ driver.student.createdAt | date }}
                             </td>
                         </tr>
                         <!-- <tr *ngFor="let product of products; let i = index" class="cursor-pointer" (click)="showProduct(product.id)">

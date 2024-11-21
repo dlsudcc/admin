@@ -25,7 +25,7 @@ export class UpdateDocumentComponent {
   }
   submitForm() {
     this.isLoading = true;
-    const api = this.isStudent ? this.documentService.updateStudentDocument(this.form, this.form.id) : this.documentService.updateStudentDocument(this.form, this.form.id); 
+    const api = this.isStudent ? this.documentService.updateStudentDocument(this.form, this.form.id) : this.documentService.updateDriverDocument(this.form, this.form.id);
     api.subscribe(
       {
         next: (result) => {

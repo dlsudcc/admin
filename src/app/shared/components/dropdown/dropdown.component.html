@@ -1,10 +1,24 @@
 <div class="dropdown">
     <label [class]="labelClass" class="font-weight-bold">{{ label }}</label>
-    <input type="text" class="form-control" [class]="error ? 'border-danger': ''" [disabled]="disabled" placeholder="Enter {{ label }}" [(ngModel)]="searchText" (ngModelChange)="onSearchTextChanged()">
+    <input type="text" 
+        (focus)="onFocus()" 
+        (blur)="onBlur()"
+        class="form-control" 
+        [class]="error ? 'border-danger': ''" 
+        [disabled]="disabled" 
+        placeholder="Enter {{ label }}" 
+        [(ngModel)]="searchText" 
+        (ngModelChange)="onSearchTextChanged()">
   
-    <ul class="list-group mt-2 position-absolute w-100" *ngIf="filteredData.length">
+    <ul class="list-group mt-2 position-absolute w-100">
         <li *ngFor="let item of filteredData" class="list-group-item highlight-on-hover cursor-pointer" (click)="onSelect(item)">
         {{ item[field] }}
+        </li>
+        <li class="list-group-item" *ngIf="filteredData.length === 0 && searchText && !isLoading && isActive">
+            No result found
+        </li>
+        <li class="list-group-item" *ngIf="searchText && isLoading && isActive">
+            Loading...
         </li>
     </ul>
 </div>

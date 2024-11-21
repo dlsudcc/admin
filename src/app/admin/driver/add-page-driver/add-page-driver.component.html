@@ -1,0 +1,394 @@
+
+
+<form (ngSubmit)="submitForm()">
+  <div class="w-100">
+    <nav class="navbar navigation">
+      <ul class="m-0 p-0">
+          <li class="cursor-pointer" [routerLink]="'../../driver'">Drivers</li>
+          <li>
+              <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+                  <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
+              </div>
+          </li>
+          <li class="highlight-color">New</li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="row bg-white pt-1">
+          <div class="col-12 col-md-4">
+              <div class="form-group mb-0">
+                  <app-dropdown
+                      [data]="students"
+                      (formModelChange)="selectStudent($event)"
+                      [field]="'name'"
+                      [clearAfterSelect]="false"
+                      [isLoading]="isDropdownLoading"
+                      [error]="form.getError('student')"
+                      [label]="'Student'"
+                      [labelClass]="'form-label'"
+                      (userSearchedText)="searchStudents($event)">
+                  </app-dropdown>
+              </div>
+              <div *ngIf="form.getError('student')" class="text-danger">
+                  {{ form.getError('student') }}
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Last Name</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.lastName }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">First Name</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.lastName }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Middle Name</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.middleName | nullable }}</span>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Email</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.authentication.email }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Username</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.authentication.username }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Date Created</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{form.student?.createdAt | date }}</span>
+              </div>
+          </div>
+      </div>
+      <hr>
+      <div class="row mt-3">
+          <div class="col-12 col-lg-4 font-md">
+              <h5>Academic Information</h5>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Department</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.department.description }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Section</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.section.name }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Year</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.year }}</span>
+              </div>
+          </div>
+      </div>
+      <hr>
+      <div class="row mt-3">
+          <div class="col-12 col-lg-4 font-md">
+              <h5>Home Address</h5>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">House No.</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.houseNumber }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Street/Village</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.streetVillage }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Barangay</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.barangay }}</span>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">City/Municipality</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.cityMunicipality }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Province</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.province }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Region</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.region }}</span>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Zipcode</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.homeAddress.zipCode }}</span>
+              </div>
+          </div>
+      </div>
+      <hr>
+      <div class="row mt-3">
+          <div class="col-12 col-lg-4 font-md">
+              <h5>Permanent Address</h5>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">House No.</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.permanentAddress.houseNumber }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Street/Village</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.permanentAddress.streetVillage }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Barangay</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.permanentAddress.barangay }}</span>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">City/Municipality</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.permanentAddress.cityMunicipality }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Province</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{ form.student?.permanentAddress.province }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <label class="form-label fw-bold text-muted">Region</label>
+            <div class="d-flex align-items-center">
+                <span class="fs-5">{{ form.student?.permanentAddress.region }}</span>
+            </div>
+          </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">Zipcode</label>
+          <div class="d-flex align-items-center">
+              <span class="fs-5">{{ form.student?.permanentAddress.zipCode }}</span>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row mt-3">
+        <div class="col-6 col-lg-4 font-md">
+            <h5>License Information</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">License Number</label>
+          <input name="licenseNumber"
+              type="text"
+              [class]="form.getError('licenseNumber') ? 'border-danger': ''"
+              class="form-control form-control-md"
+              [(ngModel)]="form.licenseNumber"
+              placeholder="License Number"
+          >
+          <div *ngIf="form.getError('licenseNumber')" class="text-danger">
+              {{ form.getError('licenseNumber') }}
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">Agency Code</label>
+          <input name="agencyCode"
+              type="text"
+              [class]="form.getError('agencyCode') ? 'border-danger': ''"
+              class="form-control form-control-md"
+              [(ngModel)]="form.agencyCode"
+              placeholder="License Number"
+          >
+          <div *ngIf="form.getError('agencyCode')" class="text-danger">
+              {{ form.getError('agencyCode') }}
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">Restrictions</label>
+          <div class="row">
+              <div class="col-2" *ngFor="let restriction of form.restrictions; let i = index;">
+                  <div class="form-check form-check-sm mr-4"  >
+                      <input [name]="'restriction' + [i]" class="form-check-input" type="checkbox"
+                          [class]="form.getError('restrictions') ? 'border-danger': ''"
+                          [(ngModel)]="form.restrictions[i].isSelected"
+                      >
+                      <label class="form-check-label">
+                          {{restriction.id}}
+                      </label>
+                      <ng-container *ngIf="i > 4">
+                          <br>
+                      </ng-container>
+                  </div>
+              </div>
+          </div>
+          <div *ngIf="form.getError('restrictions')" class="text-danger">
+              {{ form.getError('restrictions') }}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">Height (cm)</label>
+          <input name="height"
+              type="number"
+              [class]="form.getError('height') ? 'border-danger': ''"
+              class="form-control form-control-md no-spin"
+              (keypress)="preventExtraDecimals($event)"
+              [(ngModel)]="form.height"
+              placeholder="Height"
+          >
+          <div *ngIf="form.getError('height')" class="text-danger">
+              {{ form.getError('height') }}
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">Weight (lbs)</label>
+          <input name="weight"
+              type="number"
+              [class]="form.getError('weight') ? 'border-danger': ''"
+              class="form-control form-control-md no-spin"
+              (keypress)="preventExtraDecimals($event)"
+              [(ngModel)]="form.weight"
+              placeholder="Weight"
+          >
+          <div *ngIf="form.getError('weight')" class="text-danger">
+              {{ form.getError('weight') }}
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <label class="form-label fw-bold text-muted">License Expiration Date</label>
+          <input name="licenseExpirationDate"
+              type="date"
+              [class]="form.getError('licenseExpirationDate') ? 'border-danger': ''"
+              class="form-control form-control-md no-spin"
+              [(ngModel)]="form.licenseExpirationDate"
+              placeholder="License Expiration Date"
+          >
+          <div *ngIf="form.getError('licenseExpirationDate')" class="text-danger">
+              {{ form.getError('licenseExpirationDate') }}
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6 col-lg-4 font-md">
+          <h5>Verification Information</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-success" type="button" (click)="addDocument()">
+              <div class="icon plus mr-2 ml-0 color-unchange">
+                  <i-lucide name="plus" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+              <div class="color-unchange"></div>
+          </button>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <table class="table table-responsive h-100">
+            <thead>
+              <tr>
+                <th *ngFor="let tableHeader of tableHeaders" [class]="tableHeader.class" class="th-sort">
+                    {{ tableHeader.label }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="form.documents.length === 0">
+                <td [attr.colspan]="tableHeaders.length">
+                    No result found.
+                </td>
+              </tr>
+              <tr class="listing-row cursor-pointer" *ngFor="let document of form.documents; let i = index;">
+                <td>
+                    {{ i+1 }}
+                </td>
+                <td>
+                    {{ DocumentTypeLabels[document.type] + (document.type === DocumentType.OTHER ? ':' + document.otherType : '') }}
+                </td>
+                <td>
+                    {{ document.remarks | nullable }}
+                </td>
+                <td>
+                  <button class="btn btn-info color-unchange" type="button" (click)="viewDocument(document)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm download color-unchange">
+                        <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>
+                    </div>
+                  </button>
+                  <button class="btn ml-1 btn-warning color-unchange" type="button" (click)="updateDocument(document)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm pencil color-unchange">
+                        <i-lucide name="pencil" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>
+                    </div>
+                  </button>
+                  <button class="btn ml-1 btn-danger color-unchange" type="button" (click)="deleteDocument(document)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm trash color-unchange">
+                        <i-lucide name="trash" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>
+                    </div>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="form.getError('documents')" class="text-danger">
+              {{ form.getError('documents') }}
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 d-flex justify-content-end">
+          <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
+              <div class="d-flex justify-content-center color-unchange">
+                <div class="icon-sm check color-unchange">
+                  <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
+                </div>
+                  Save
+              </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

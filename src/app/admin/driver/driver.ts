@@ -101,7 +101,7 @@ export class DriverForm extends FormUtils implements iDriver {
     licenseNumber: string;
     licenseExpirationDate: Date;
     agencyCode: string;
-    restrictions: RestrictionDTO [];
+    restrictions: RestrictionDTO [] = [];
     // conditions: ConditionDTO [];
     documents: DocumentDTO[] = [];
     weight: number;
@@ -118,11 +118,20 @@ export class DriverForm extends FormUtils implements iDriver {
         this.licenseNumber = driver?.licenseNumber;
         this.agencyCode = driver?.agencyCode;
         this.student = driver?.student;
-        this.restrictions = driver?.restrictions;
-        // this.conditions = driver?.conditions;
+        this.documents = driver?.documents;
         this.licenseExpirationDate = driver?.licenseExpirationDate;
         this.weight = driver?.weight;
         this.height = driver?.height;
+    }
+    fillRestrictions(restrictions, driverRestrictions) {
+      restrictions?.forEach((restriction) => {
+        const matchingRestriction = driverRestrictions.find(item => item.id === restriction.id);
+        let restrict = new RestrictionDTO()
+        restrict.id = restriction.id;
+        restrict.description = restriction.description;
+        restrict.isSelected = matchingRestriction;
+        this.restrictions.push(restrict);
+      });
     }
     updateDocument (document: DocumentDTO) {
       let index = this.documents.findIndex(it => it.id === document.id);

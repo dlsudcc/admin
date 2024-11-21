@@ -58,7 +58,7 @@ export class UpdatePageDriverComponent implements OnInit {
     }
     this.driverService.restrictions().subscribe({
       next: (result) => {
-        this.form.restrictions = this.restriction.restrictionsMapper(result);
+        this.restrictions = this.restriction.restrictionsMapper(result);
         this.loadContent();
       }
     })
@@ -69,10 +69,10 @@ export class UpdatePageDriverComponent implements OnInit {
     this.driverService.show(this.id).subscribe(
       {
         next: (result) => {
-          this.form = new DriverForm();
           this.driver = new DriverDTO();
           this.driver = this.driver.driverMapper(result);
           this.form.fill(this.driver);
+          this.form.fillRestrictions(this.restrictions, this.driver.restrictions)
         },
         error: (error) => {
           const form = new DriverForm();
@@ -171,10 +171,11 @@ export class UpdatePageDriverComponent implements OnInit {
   submitForm() {
     this.loadingService.show();
     this.isLoading = true;
-    this.driverService.addDriver(this.form).subscribe({
+    this.driverService.updateDriver(this.form).subscribe({
       next: (result) => {
-        this.toastService.add("Success", "Driver Created Successfully", ToastType.SUCCESS);
-        const driver = this.driver.driverMapper(result);
+        this.toastService.add("Success", "Driver Updated Successfully", ToastType.SUCCESS);
+        const res = new DriverDTO();
+        const driver = res.driverMapper(result);
         this.route.navigate(['admin/driver/'+driver.id])
       },
       error: (result) => {
@@ -187,6 +188,9 @@ export class UpdatePageDriverComponent implements OnInit {
         this.loadingService.hide();
       }
     })
+  }
+  cancel() {
+    this.route.navigate(['admin/driver/'+this.driver.id])
   }
   preventExtraDecimals(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;

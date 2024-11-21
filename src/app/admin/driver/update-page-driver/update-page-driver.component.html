@@ -6,21 +6,15 @@
       <ul class="m-0 p-0">
           <li class="cursor-pointer" [routerLink]="'../../driver'">Drivers</li>
           <li>
-              <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+              <div class="ml-2 fa navigation-icon mr-2 color-unchange chevron-right">
                   <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
               </div>
           </li>
-          <li>
-            <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
-              <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
-            </div>
-          </li>
-          <li *ngIf="driver" class="highlight-color">
-            {{ driver.student.firstName + " " + driver.student.lastName }}
-            <app-status-labels [entity]="'DriverStatus'" [status]="driver.status"></app-status-labels>
+          <li *ngIf="driver">
+            {{ driver.student?.firstName + " " + driver.student?.lastName }}
           </li>
           <li>
-            <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+            <div class="ml-2 fa navigation-icon mr-2 color-unchange chevron-right">
               <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
             </div>
           </li>
@@ -28,27 +22,7 @@
       </ul>
     </nav>
     <div class="container">
-      <div class="row bg-white pt-1">
-          <div class="col-12 col-md-4">
-              <div class="form-group mb-0">
-                  <app-dropdown
-                      [data]="students"
-                      (formModelChange)="selectStudent($event)"
-                      [field]="'name'"
-                      [clearAfterSelect]="false"
-                      [isLoading]="isDropdownLoading"
-                      [error]="form.getError('student')"
-                      [label]="'Student'"
-                      [labelClass]="'form-label'"
-                      (userSearchedText)="searchStudents($event)">
-                  </app-dropdown>
-              </div>
-              <div *ngIf="form.getError('student')" class="text-danger">
-                  {{ form.getError('student') }}
-              </div>
-          </div>
-      </div>
-      <div class="row">
+      <div class="row pt-1">
           <div class="col-12 col-lg-4">
               <label class="form-label fw-bold text-muted">Last Name</label>
               <div class="d-flex align-items-center">
@@ -393,13 +367,18 @@
       </div>
       <div class="row mt-2">
         <div class="col-12 d-flex justify-content-end">
-          <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
-              <div class="d-flex justify-content-center color-unchange">
-                <div class="icon-sm check color-unchange">
-                  <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
-                </div>
-                  Save
+          <button class="btn btn-secondary pt-1 pb-1" type="button" (click)="cancel()" [disabled]="isLoading">
+            <div class="d-flex justify-content-center color-unchange">
+              Cancel
+            </div>
+          </button>
+          <button class="btn btn-success ml-2 pt-1 pb-1" type="submit" [disabled]="isLoading">
+            <div class="d-flex justify-content-center color-unchange">
+              <div class="icon-sm check color-unchange">
+                <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
               </div>
+              Save
+            </div>
           </button>
         </div>
       </div>

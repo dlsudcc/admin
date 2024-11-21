@@ -21,6 +21,9 @@ export class DriverService extends ApiService {
   addDriver(form: DriverForm) {
     return this.postRequest('driver_new', form.toSubmit());
   }
+  updateDriver(form: DriverForm) {
+    return this.putRequest('driver_update/'+form.id, form.toSubmit());
+  }
   departments(params) {
     this.setParameters(params, true);
     return this.getRequest('driver_departments/');

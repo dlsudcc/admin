@@ -52,7 +52,6 @@ export class AddPageDriverComponent implements OnInit {
     this.driverService.restrictions().subscribe({
       next: (result) => {
         this.form.restrictions = this.restriction.restrictionsMapper(result);
-        console.log(this.restrictions);
       }
     })
   }

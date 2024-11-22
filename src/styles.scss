@@ -9,6 +9,9 @@ $light-link-color: #336021;
 $light-link-color-hover: #ccb62d;
 $light-btn-bg: #336021;
 $light-btn-text: #ffffff;
+$primary-color: #336021;
+$secondary-color: #ccb62d;
+$tertiary-color: #d8d1bd;
 
 $highlight-color: #ccb62d;
 $table-hover-color: #d8d1bd;
@@ -27,6 +30,15 @@ $dark-btn-text: #f8f9fa;
 *::before,
 *::after {
   transition: background-color 100ms ease, color 10ms ease;
+}
+.bg-primary-color {
+  background-color: $primary-color ;
+}
+.bg-secondary-color {
+  background-color: $secondary-color ;
+}
+.bg-tertiary-color {
+  background-color: $tertiary-color ;
 }
 .border-main {
   border-right: 1px solid gray;
@@ -51,7 +63,7 @@ a {
   color: $light-link-color !important;
   text-decoration: none !important;
 
-}  
+}
 a:hover {
   color: $light-link-color-hover !important;
   text-decoration: none !important;
@@ -90,7 +102,7 @@ button {
     background-color: $dark-header-bg !important;
     text-decoration: none !important;
   }
-  
+
 
   header {
       background-color: $dark-header-bg;
@@ -155,7 +167,7 @@ button {
   padding: 1rem;
   border-top: 1px solid gray
 }
-    
+
 .navbar.navigation ul {
   list-style-type: none;
   display: flex;
@@ -184,7 +196,7 @@ button {
   font-size: 10px;
 }
 .container-content {
-  
+
   max-height: 92vh;
   overflow: scroll;
   -ms-overflow-style: none; // IE and Edge

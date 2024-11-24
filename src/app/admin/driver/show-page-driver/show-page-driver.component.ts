@@ -28,6 +28,14 @@ export class ShowPageDriverComponent implements OnInit {
     { name: 'remarks', label: 'Remarks', class:"col-4" },
     { name: '', label: 'Action', class:"col-4" }
   ]
+  vehicleTableHeaders = [
+    { name: '', label: '', class:"" },
+    { name: 'make', label: 'Make', class:"col-2" },
+    { name: 'series', label: 'Series', class:"col-2" },
+    { name: 'color', label: 'Color', class:"col-2" },
+    { name: 'plateNumber', label: 'Plate #', class:"col-2" },
+    { name: '', label: 'Action', class:"col-4" }
+  ]
   constructor(
     private route: ActivatedRoute,
     private router: Router,

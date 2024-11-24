@@ -15,6 +15,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   @Input() isLoading = false;
   isActive = false;
   @Input() error;
+  @Input() updateModel;
   @Input() clearAfterSelect = false;
   @Input() disabled = false;
   @Input() labelClass = '';
@@ -29,6 +30,10 @@ export class DropdownComponent implements OnInit, OnChanges {
   private searchTextChanged = new Subject<string>(); // Subject to handle search text changes
 
   ngOnInit(): void {
+    console.log(this.updateModel);
+    if (this.updateModel) {
+      this.searchText = this.updateModel[this.field];
+    }
     this.searchTextChanged
       .pipe(debounceTime(300)) // 300 ms delay
       .subscribe(() => {
@@ -87,7 +92,7 @@ export class DropdownComponent implements OnInit, OnChanges {
     console.log(item);
     this.formModel = item;
     this.formModelChange.emit(item);
-    // this.selectionChanged.emit(item); 
+    // this.selectionChanged.emit(item);
     this.filteredData = [];
     this.searchText = item[this.field];
     this.searchText = this.clearAfterSelect ? null: this.searchText;

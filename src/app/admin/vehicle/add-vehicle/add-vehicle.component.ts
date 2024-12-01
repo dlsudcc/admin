@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { BodyTypeDTO, MakeDTO, VehicleForm } from '../vehicle';
+import { BodyTypeDTO, MakeDTO, VehicleDTO, VehicleForm } from '../vehicle';
 import { DocumentForm } from '../../document/document';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { ToastType } from 'src/app/shared/components/toast/toast';
@@ -37,9 +37,10 @@ export class AddVehicleComponent {
     const api = this.vehicleService.add(this.form);
     api.subscribe(
       {
-        next: (result) => {
+        next: (result: VehicleDTO) => {
           this.toastService.add("Success", "Vehicle Added", ToastType.SUCCESS);
           this.isLoading = false;
+          result.isNew = true;
           this.modal.close(result);
         },
         error : (error) => {

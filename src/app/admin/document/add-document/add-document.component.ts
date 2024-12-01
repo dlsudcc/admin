@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { DocumentForm, DocumentType, DocumentTypeLabels } from '../document';
+import { DocumentDTO, DocumentForm, DocumentType, DocumentTypeLabels } from '../document';
 import { DocumentService } from '../document.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -88,9 +88,10 @@ export class AddDocumentComponent {
     const api = this.isStudent ? this.documentService.addStudentDocument(this.form) : this.documentService.addDriverDocument(this.form);
     api.subscribe(
       {
-        next: (result) => {
+        next: (result: DocumentDTO) => {
           this.toastService.add("Success", "Document Added", ToastType.SUCCESS);
           this.isLoading = false;
+          result.isNew = true;
           this.modal.close(result);
         },
         error : (error) => {

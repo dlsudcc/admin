@@ -18,6 +18,8 @@ export interface iVehicle {
   orDate: Date;
   orDocument: File;
   crDocument: File;
+  isNew: boolean;
+  isDeleted: boolean;
   crDate: Date;
   series: string;
   bodyType: BodyTypeDTO;
@@ -36,6 +38,8 @@ export class VehicleDTO implements iVehicle {
   orNumber: string;
   crNumber: string;
   orDocument: File;
+  isNew: boolean;
+  isDeleted: boolean;
   crDocument: File;
   orDoc: DocumentDTO;
   crDoc: DocumentDTO;
@@ -63,6 +67,9 @@ export class VehicleForm extends FormUtils implements iVehicle {
   crDate: Date;
   series: string;
   bodyType: BodyTypeDTO;
+  isUpdateDriver = false;
+  isNew = false;
+  isDeleted = false;
   fill(vehicle: VehicleDTO) {
     this.id = vehicle?.id;
     this.status = vehicle?.status;
@@ -73,6 +80,7 @@ export class VehicleForm extends FormUtils implements iVehicle {
     this.netDisplacement = vehicle?.netDisplacement;
     this.netCapacity = vehicle?.netCapacity;
     this.make = vehicle?.make;
+    this.isNew = false;
     this.orDate = vehicle?.orDate;
     this.orDoc = vehicle?.orDoc;
     this.crDoc = vehicle?.crDoc;
@@ -98,6 +106,8 @@ export class VehicleForm extends FormUtils implements iVehicle {
       crNumber: this.crNumber,
       series: this.series,
       bodyType: this.bodyType.id,
+      isUpdateDriver: this.isUpdateDriver,
+      isNew: this.isNew
     }
   }
 }

@@ -106,6 +106,9 @@ export class DriverForm extends FormUtils implements iDriver {
     agencyCode: string;
     restrictions: RestrictionDTO [] = [];
     vehicles: VehicleDTO [] = [];
+    get activeVehicles() {
+      return this.vehicles.filter(it => !it.isDeleted);
+    }
     documents: DocumentDTO[] = [];
     weight: number;
     height: number;
@@ -153,12 +156,12 @@ export class DriverForm extends FormUtils implements iDriver {
       return {
         id: this.id,
         restrictions: this.selectedRestrictions.map(it => it.id),
-        documents: this.documents.map(it=>it.id),
+        documents: this.id ? this.documents : this.documents.map(it=>it.id),
         height: this.height,
         weight: this.weight,
         licenseExpirationDate: this.licenseExpirationDate,
         student: this.student?.id,
-        vehicles: this.vehicles.map(it=>it.id),
+        vehicles: this.id ? this.vehicles : this.vehicles.map(it=>it.id),
         agencyCode: this.agencyCode,
         licenseNumber: this.licenseNumber
       }

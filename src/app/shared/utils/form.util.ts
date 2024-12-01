@@ -29,9 +29,9 @@ export class FormUtils {
                             error = this.formatControlName(controlName)+ ' must be an email';
                         break;
                         case 'minLength':
-                            error = this.formatControlName(controlName) + ' must be equal or greater than ' + value?.requiredLength;    
+                            error = this.formatControlName(controlName) + ' must be equal or greater than ' + value?.requiredLength;
                     }
-                    
+
                     if (!this.errors.find(it=>it.field == controlName)) {
                         this.errors.push({field: controlName, error: error})
                     }
@@ -50,15 +50,14 @@ export class FormUtils {
         return errors;
     }
     handleFormError(data, dtoErrors) {
-        console.log(data);
         if (data.error.errors) {
             dtoErrors = {};
             for (const field in data.error.errors) {
-                if (data.status == 400 && data.error.errors[field]) {
-                    dtoErrors[field] = data.error.errors[field];
-                } else {
-                    dtoErrors['otherError' + field] = data.error.errors[field];
-                }
+              if (isNaN(Number(field)) && data.error.errors[field]) {
+                  dtoErrors[field] = data.error.errors[field];
+              } else {
+                  dtoErrors['otherError' + field] = data.error.errors[field];
+              }
             }
             return dtoErrors;
         }

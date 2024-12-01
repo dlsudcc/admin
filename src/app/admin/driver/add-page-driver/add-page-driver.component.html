@@ -309,6 +309,89 @@
       </div>
       <div class="row mt-3">
         <div class="col-6 col-lg-4 font-md">
+          <h5>Vehicle Information</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-success" type="button" (click)="addVehicle()">
+              <div class="icon plus mr-2 ml-0 color-unchange">
+                  <i-lucide name="plus" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+              <div class="color-unchange"></div>
+          </button>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <table class="table table-responsive h-100">
+            <thead>
+              <tr>
+                <th *ngFor="let tableHeader of vehicleTableHeaders" [class]="tableHeader.class" class="th-sort">
+                    {{ tableHeader.label }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="form.vehicles.length === 0">
+                <td [attr.colspan]="tableHeaders.length">
+                    No result found.
+                </td>
+              </tr>
+              <tr class="listing-row cursor-pointer" *ngFor="let vehicle of form.vehicles; let i = index;">
+                <td>
+                  {{ i+1 }}
+                </td>
+                <td>
+                  {{ vehicle.make.name }}
+                </td>
+                <td>
+                  {{ vehicle.series }}
+                </td>
+                <td>
+                  {{ vehicle.color }}
+                </td>
+                <td>
+                  {{ vehicle.plateNumber }}
+                </td>
+                <td>
+                  <button class="btn btn-info color-unchange" type="button" (click)="viewDocument(vehicle.orDoc)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm download color-unchange">
+                        <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>View OR
+                    </div>
+                  </button>
+                  <button class="btn ml-1 btn-info color-unchange" type="button" (click)="viewDocument(vehicle.crDoc)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm download color-unchange">
+                        <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>View CR
+                    </div>
+                  </button>
+                  <button class="btn ml-1 btn-warning color-unchange" type="button" (click)="updateVehicle(vehicle)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm pencil color-unchange">
+                        <i-lucide name="pencil" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>
+                    </div>
+                  </button>
+                  <button class="btn ml-1 btn-danger color-unchange" type="button" (click)="deleteVehicle(vehicle)">
+                    <div class="d-flex justify-content-center color-unchange">
+                      <div class="icon-sm trash color-unchange">
+                        <i-lucide name="trash" class="icon-sm d-flex align-items-center"></i-lucide>
+                      </div>
+                    </div>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="form.getError('vehicles')" class="text-danger">
+              {{ form.getError('vehicles') }}
+          </div>
+        </div>
+      </div>
+      <div class="row" [class]="form.getError('vehicles') ? 'mt-5' :'mt-3'">
+        <div class="col-6 col-lg-4 font-md">
           <h5>Verification Information</h5>
         </div>
         <div class="col d-flex justify-content-end">

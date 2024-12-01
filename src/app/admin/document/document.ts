@@ -12,6 +12,9 @@ export interface iDocument {
     otherType: string;
     student: StudentDTO;
     location: string;
+    isNew: boolean;
+    isUpdateDriver: boolean;
+    isDeleted: boolean;
     driver: DriverDTO;
 }
 export class DocumentDTO {
@@ -24,6 +27,9 @@ export class DocumentDTO {
     location: string;
     student: StudentDTO;
     createdAt: Date;
+    isNew: boolean;
+    isUpdateDriver = false;
+    isDeleted = false;
     driver: DriverDTO;
 
     documentMapper(data) {
@@ -51,12 +57,16 @@ export class DocumentForm extends FormUtils implements iDocument {
     remarks: string;
     student: StudentDTO;
     driver: DriverDTO;
+    isUpdateDriver = false;
+    isNew = true;
+    isDeleted = false;
     fill (document: DocumentDTO) {
         this.id = document?.id;
         this.type = document?.type;
         this.filename = document?.filename;
         this.otherType = document?.otherType;
         this.remarks = document?.remarks;
+        this.isNew = false;
         this.originalFileName = document?.originalFileName;
         this.student = document?.student;
         this.driver = document?.driver;

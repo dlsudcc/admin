@@ -1,0 +1,262 @@
+
+
+<div class="col-12">
+  <div class="container">
+      <div class="row mt-2">
+          <div class="col-12 p-0" >
+              <h5>New Vehicle</h5>
+          </div>
+      </div>
+      <form (ngSubmit)="submitForm()">
+          <div class="row">
+              <div class="col-12 p-0 p-lg-2 col-lg-6">
+                  <div class="form-group mb-1">
+                    <label for="plateNumber"><strong>Plate Number</strong></label>
+                      <input name="plateNumber" type="text" [class]="form.getError('plateNumber') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.plateNumber" placeholder="Plate Number">
+                  </div>
+                  <div *ngIf="form.getError('plateNumber')" class="text-danger">
+                      {{ form.getError('plateNumber') }}
+                  </div>
+              </div>
+              <div class="col-12 p-0 p-lg-2 col-lg-6">
+                  <div class="form-group mb-1">
+                    <label for="engineNumber"><strong>Engine Number</strong></label>
+                    <input name="engineNumber" type="text" [class]="form.getError('engineNumber') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.engineNumber" placeholder="Engine Number">
+                  </div>
+                  <div *ngIf="form.getError('engineNumber')" class="text-danger">
+                      {{ form.getError('engineNumber') }}
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-12 p-0 p-lg-2 col-lg-6">
+                  <div class="form-group mb-1">
+                    <label for="color"><strong>Color</strong></label>
+                    <input name="color" type="text" [class]="form.getError('color') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.color" placeholder="Color">
+                  </div>
+                  <div *ngIf="form.getError('color')" class="text-danger">
+                      {{ form.getError('color') }}
+                  </div>
+              </div>
+              <div class="col-12 p-0 p-lg-2 col-lg-6">
+                  <div class="form-group mb-1">
+                    <label for="color"><strong>Chassis Number</strong></label>
+                    <input name="chassisNumber" type="text" [class]="form.getError('chassisNumber') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.chassisNumber" placeholder="Chassis Number">
+                  </div>
+                  <div *ngIf="form.getError('chassisNumber')" class="text-danger">
+                      {{ form.getError('chassisNumber') }}
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+                <div class="form-group mb-1">
+                    <label for="netDisplacement"><strong>Net Displacement</strong></label>
+                    <input name="netDisplacement"
+                      type="text"
+                      [class]="form.getError('netDisplacement') ? 'border-danger': ''"
+                      class="form-control form-control-md"
+                      (keypress)="preventExtraDecimals($event)"
+                      [(ngModel)]="form.netDisplacement" placeholder="Net Displacement">
+                </div>
+                <div *ngIf="form.getError('netDisplacement')" class="text-danger">
+                    {{ form.getError('netDisplacement') }}
+                </div>
+            </div>
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <div class="form-group mb-1">
+                <label for="netCapacity"><strong>Net Capacity</strong></label>
+                <input name="netCapacity" type="number"
+                  (keypress)="preventExtraDecimals($event)"
+                  [class]="form.getError('netCapacity') ? 'border-danger': ''"
+                  class="form-control form-control-md"
+                  [(ngModel)]="form.netCapacity" placeholder="Net Capacity">
+              </div>
+              <div *ngIf="form.getError('netCapacity')" class="text-danger">
+                  {{ form.getError('netCapacity') }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <div class="form-group mb-0">
+                <app-dropdown
+                    [data]="makes"
+                    (formModelChange)="selectMake($event)"
+                    [field]="'name'"
+                    [clearAfterSelect]="false"
+                    [isLoading]="isDropdownLoading"
+                    [error]="form.getError('make')"
+                    [label]="'Make'"
+                    [labelClass]="'form-label'"
+                    (userSearchedText)="searchMakes($event)">
+                </app-dropdown>
+              </div>
+              <div *ngIf="form.getError('make')" class="text-danger">
+                  {{ form.getError('make') }}
+              </div>
+            </div>
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <div class="form-group mb-1">
+                <label for="series"><strong>Series</strong></label>
+                <input name="series" type="text"
+                  [class]="form.getError('series') ? 'border-danger': ''"
+                  class="form-control form-control-md"
+                  [(ngModel)]="form.series" placeholder="Series">
+              </div>
+              <div *ngIf="form.getError('series')" class="text-danger">
+                  {{ form.getError('series') }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <div class="form-group mb-0">
+                <app-dropdown
+                    [data]="bodyTypes"
+                    (formModelChange)="selectBodyType($event)"
+                    [field]="'name'"
+                    [clearAfterSelect]="false"
+                    [isLoading]="isDropdownLoading"
+                    [error]="form.getError('bodyType')"
+                    [label]="'Body Type'"
+                    [labelClass]="'form-label'"
+                    (userSearchedText)="searchBodyTypes($event)">
+                </app-dropdown>
+              </div>
+              <div *ngIf="form.getError('bodyType')" class="text-danger">
+                  {{ form.getError('bodyType') }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <label for="orNumber"><strong>OR Number</strong></label>
+              <input name="orNumber" type="text"
+                [class]="form.getError('orNumber') ? 'border-danger': ''"
+                class="form-control form-control-md"
+                [(ngModel)]="form.orNumber" placeholder="OR Number">
+              <div *ngIf="form.getError('orNumber')" class="text-danger">
+                  {{ form.getError('orNumber') }}
+              </div>
+            </div>
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <label for="orDate"><strong>OR Date</strong></label>
+              <input name="orDate"
+                  type="date"
+                  [class]="form.getError('orDate') ? 'border-danger': ''"
+                  class="form-control form-control-md no-spin"
+                  [(ngModel)]="form.orDate"
+                  placeholder="OR Date"
+              >
+              <div *ngIf="form.getError('orDate')" class="text-danger">
+                  {{ form.getError('orDate') }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <label for="crNumber"><strong>CR Number</strong></label>
+              <input name="crNumber" type="text"
+                [class]="form.getError('orNumber') ? 'border-danger': ''"
+                class="form-control form-control-md"
+                [(ngModel)]="form.crNumber" placeholder="CR Number">
+              <div *ngIf="form.getError('crNumber')" class="text-danger">
+                  {{ form.getError('crNumber') }}
+              </div>
+            </div>
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+              <label for="crDate"><strong>CR Date</strong></label>
+              <input name="crDate"
+                  type="date"
+                  [class]="form.getError('crDate') ? 'border-danger': ''"
+                  class="form-control form-control-md no-spin"
+                  [(ngModel)]="form.crDate"
+                  placeholder="CR Date"
+              >
+              <div *ngIf="form.getError('crDate')" class="text-danger">
+                  {{ form.getError('crDate') }}
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <h5>Official Receipt Document</h5>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div
+                  class="file-drop-zone"
+                  [class.file-over]="isFileOver"
+                  (click)="onSelectFile('OR')"
+                  (drop)="onFileDrop($event, 'OR')"
+                  (dragover)="onDragOver($event)"
+                  (dragleave)="onDragLeave($event)"
+                  >
+                  <p *ngIf="!form.orDocument">Drag and drop a file here, or click to select one</p>
+                  <p *ngIf="form.orDocument">{{ form.orDocument.name }}</p>
+              </div>
+              <input
+                  type="file"
+                  #fileInputOR
+                  accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
+                  (change)="onFileSelected($event, 'OR')"
+                  style="display: none;"
+              >
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <h5>Certificate Of Registration Document</h5>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <div
+                  class="file-drop-zone"
+                  [class.file-over]="isFileOver"
+                  (click)="onSelectFile('CR')"
+                  (drop)="onFileDrop($event,'CR')"
+                  (dragover)="onDragOver($event)"
+                  (dragleave)="onDragLeave($event)"
+                  >
+                  <p *ngIf="!form.crDocument">Drag and drop a file here, or click to select one</p>
+                  <p *ngIf="form.crDocument">{{ form.crDocument.name }}</p>
+              </div>
+              <input
+                type="file"
+                #fileInputCR
+                accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
+                (change)="onFileSelected($event, 'CR')"
+                style="display: none;"
+              >
+            </div>
+          </div>
+          <div class="row" *ngIf="form.otherErrors.length > 0">
+              <div class="col-12 pl-2">
+                  <div *ngFor="let error of form.otherErrors" class="text-danger">
+                      {{ error }}
+                  </div>
+              </div>
+          </div>
+          <div class="row mb-2">
+              <div class="col-6 offset-6 d-flex justify-content-end pr-2">
+                  <button class="btn btn-secondary mr-2 pt-1 pb-1" type="button" (click)="close()" [disabled]="isLoading">
+                      <div class="d-flex justify-content-center color-unchange">
+                          Cancel
+                      </div>
+                  </button>
+                  <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
+                      <div class="d-flex justify-content-center color-unchange">
+                          <div class="icon-sm check color-unchange">
+                          <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
+                          </div>
+                          Save
+                      </div>
+                  </button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

@@ -2,12 +2,14 @@ import { Mapper } from "src/app/shared/utils/mapper";
 import { StudentDTO } from "../student/student";
 import { DocumentDTO } from "../document/document";
 import { FormUtils } from "src/app/shared/utils/form.util";
+import { VehicleDTO } from "../vehicle/vehicle";
 
 export interface iDriver {
     id: number;
     student: StudentDTO;
     status: DriverStatus;
     licenseNumber: string;
+    vehicles: VehicleDTO[];
     documents: DocumentDTO[];
     agencyCode: string;
     canUpdate: boolean;
@@ -72,6 +74,7 @@ export class DriverDTO implements iDriver {
     licenseNumber: string;
     licenseExpirationDate: Date;
     documents: DocumentDTO[];
+    vehicles: VehicleDTO[];
     agencyCode: string;
     restrictions: RestrictionDTO [];
     // conditions: ConditionDTO [];
@@ -102,7 +105,10 @@ export class DriverForm extends FormUtils implements iDriver {
     licenseExpirationDate: Date;
     agencyCode: string;
     restrictions: RestrictionDTO [] = [];
-    // conditions: ConditionDTO [];
+    vehicles: VehicleDTO [] = [];
+    get activeVehicles() {
+      return this.vehicles.filter(it => !it.isDeleted);
+    }
     documents: DocumentDTO[] = [];
     weight: number;
     height: number;
@@ -119,6 +125,7 @@ export class DriverForm extends FormUtils implements iDriver {
         this.agencyCode = driver?.agencyCode;
         this.student = driver?.student;
         this.documents = driver?.documents;
+        this.vehicles = driver?.vehicles;
         this.licenseExpirationDate = driver?.licenseExpirationDate;
         this.weight = driver?.weight;
         this.height = driver?.height;
@@ -139,16 +146,22 @@ export class DriverForm extends FormUtils implements iDriver {
         this.documents.splice(index, 1, document); // Replace the object at the index
       }
     }
+    updateVehicle (vehicle: VehicleDTO) {
+      let index = this.vehicles.findIndex(it => it.id === vehicle.id);
+      if (index !== -1) {
+        this.vehicles.splice(index, 1, vehicle); // Replace the object at the index
+      }
+    }
     toSubmit() {
       return {
         id: this.id,
         restrictions: this.selectedRestrictions.map(it => it.id),
-        documents: this.documents.map(it=>it.id),
+        documents: this.id ? this.documents : this.documents.map(it=>it.id),
         height: this.height,
         weight: this.weight,
         licenseExpirationDate: this.licenseExpirationDate,
         student: this.student?.id,
-        // conditions: this.conditions,
+        vehicles: this.id ? this.vehicles : this.vehicles.map(it=>it.id),
         agencyCode: this.agencyCode,
         licenseNumber: this.licenseNumber
       }

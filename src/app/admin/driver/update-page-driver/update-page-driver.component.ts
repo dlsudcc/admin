@@ -14,6 +14,10 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 import { ConfirmationDialogTypes, ConfirmationResponseTypes } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog';
 import { ToastType } from 'src/app/shared/components/toast/toast';
 import { AddDocumentComponent } from '../../document/add-document/add-document.component';
+import { AddVehicleComponent } from '../../vehicle/add-vehicle/add-vehicle.component';
+import { VehicleDTO } from '../../vehicle/vehicle';
+import { UpdateVehicleComponent } from '../../vehicle/update-vehicle/update-vehicle.component';
+import { VehicleService } from '../../vehicle/vehicle.service';
 
 @Component({
   selector: 'app-update-page-driver',
@@ -38,8 +42,17 @@ export class UpdatePageDriverComponent implements OnInit {
     { name: 'remarks', label: 'Remarks', class:"col-4" },
     { name: '', label: 'Action', class:"col-4" }
   ]
+  vehicleTableHeaders = [
+    { name: '', label: '', class:"" },
+    { name: 'make', label: 'Make', class:"col-2" },
+    { name: 'series', label: 'Series', class:"col-2" },
+    { name: 'color', label: 'Color', class:"col-2" },
+    { name: 'plateNumber', label: 'Plate #', class:"col-2" },
+    { name: '', label: 'Action', class:"col-4" }
+  ]
   constructor(
     private driverService: DriverService,
+    private vehicleService: VehicleService,
     private studentService: StudentService,
     private modalService: NgbModal,
     private documentService: DocumentService,
@@ -122,6 +135,7 @@ export class UpdatePageDriverComponent implements OnInit {
     modalRef.componentInstance.isStudent = false;
     modalRef.componentInstance.form.fill(document);
     modalRef.componentInstance.form.student = this.student;
+    modalRef.componentInstance.form.isUpdateDriver = true;
     modalRef.result.then((result) => {
       if (result) {
         this.form.updateDocument(result);
@@ -191,6 +205,67 @@ export class UpdatePageDriverComponent implements OnInit {
   }
   cancel() {
     this.route.navigate(['admin/driver/'+this.driver.id])
+  }
+  addVehicle() {
+    const modalRef = this.modalService.open(AddVehicleComponent, {
+      backdrop: 'static',
+      keyboard: true,
+      animation: false
+    });
+    modalRef.result.then((result) => {
+      if (result) {
+        this.form.vehicles.push(result);
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+  updateVehicle(vehicle: VehicleDTO) {
+    const modalRef = this.modalService.open(UpdateVehicleComponent, {
+      backdrop: 'static',
+      keyboard: true,
+      animation: false
+    });
+    modalRef.componentInstance.form.fill(vehicle);
+    modalRef.componentInstance.form.isUpdateDriver = true;
+    modalRef.result.then((result) => {
+      if (result) {
+        this.form.updateVehicle(result);
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+  deleteVehicle(vehicle: VehicleDTO) {
+    const modalRef = this.modalService.open(ConfirmationDialogComponent, {
+      backdrop: 'static',
+      keyboard: false,
+      size: 'md',
+      centered: true,
+      animation: false
+    });
+    modalRef.componentInstance.message = "Are you sure you want to delete?";
+    modalRef.componentInstance.type = ConfirmationDialogTypes.YESNO;
+    modalRef.result.then((result) => {
+      if (result == ConfirmationResponseTypes.YES) {
+        this.isLoading = true;
+        if (vehicle.isNew) {
+          this.vehicleService.delete(vehicle.id).subscribe({next:()=> {
+            this.toastService.add("Success", "Vehicle Deleted", ToastType.ERROR);
+            this.isLoading = false;
+            this.form.vehicles = this.form.vehicles.filter(it => it.id !== vehicle.id);
+          }, complete: ()=>{
+            this.isLoading = false;
+          }});
+        } else {
+          this.isLoading = false;
+          vehicle.isDeleted = true;
+          this.toastService.add("Success", "Vehicle Deleted", ToastType.ERROR);
+
+          // this.form.vehicles = this.form.vehicles.filter(it => it.id !== vehicle.id);
+        }
+      }
+    });
   }
   preventExtraDecimals(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;

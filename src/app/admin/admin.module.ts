@@ -7,6 +7,8 @@ import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { Page404Component } from './page404/page404.component';
+import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component';
+import { UpdateVehicleComponent } from './vehicle/update-vehicle/update-vehicle.component';
 
 
 
@@ -16,7 +18,9 @@ import { Page404Component } from './page404/page404.component';
     FooterComponent,
     SidebarComponent,
     AdminComponent,
-    Page404Component
+    Page404Component,
+    AddVehicleComponent,
+    UpdateVehicleComponent
   ],
   imports: [
     CommonModule,

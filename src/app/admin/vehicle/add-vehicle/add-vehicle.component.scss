@@ -1,0 +1,13 @@
+.file-drop-zone {
+  border: 2px dashed #cccccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.file-drop-zone.file-over {
+  background-color: #f0f8ff;
+  border-color: #007bff;
+}

@@ -7,15 +7,15 @@ import { UserListingOption } from './user-listing-options';
   providedIn: 'root'
 })
 export class UserService extends ApiService {
-  
+
   users(listingOption: UserListingOption) {
     this.setParameters(
       {
         'sort': listingOption?.sort,
         'search': listingOption?.search,
         'page': listingOption?.page
-      },
-      
+      },true
+
     )
     return this.getRequest('users');
   }

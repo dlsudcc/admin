@@ -1,0 +1,98 @@
+<div class="w-100">
+  <nav class="navbar navigation">
+      <ul class="m-0 p-0">
+          <li>Dashboard</li>
+      </ul>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 p-lg-3 pt-1 pb-1 pl-3 pr-3 d-flex justify-content-center align-items-center">
+        <div class="dashboard-counter color-unchange text-light w-100 bg-primary-color">
+          <div class="counter-title color-unchange">
+            <div class="d-flex color-unchange justify-content-center color-unchange">
+              <div class="icon-sm mr-1 dollar-sign color-unchange">
+                <i-lucide name="dollar-sign" class="icon-sm d-flex align-items-center"></i-lucide>
+              </div>Sales
+            </div>
+          </div>
+          <div class="counter-value color-unchange">1,234</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 p-lg-3 pt-1 pb-1 pl-3 pr-3 d-flex justify-content-center align-items-center">
+        <div class="dashboard-counter color-unchange text-dark w-100 bg-secondary-color">
+          <div class="counter-title color-unchange">
+            <div class="d-flex color-unchange justify-content-center color-unchange">
+              <div class="icon-sm mr-1 users color-unchange">
+                <i-lucide name="users" class="icon-sm d-flex align-items-center"></i-lucide>
+              </div>Students
+            </div>
+          </div>
+          <div class="counter-value color-unchange">1,234</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 p-lg-3 pt-1 pb-1 pl-3 pr-3 d-flex justify-content-center align-items-center">
+        <div class="dashboard-counter color-unchange text-dark w-100 bg-tertiary-color">
+          <div class="counter-title color-unchange">
+            <div class="d-flex color-unchange justify-content-center color-unchange">
+              <div class="icon-sm mr-1 id-card color-unchange">
+                <i-lucide name="id-card" class="icon-sm d-flex align-items-center"></i-lucide>
+              </div>Drivers
+            </div>
+          </div>
+          <div class="counter-value color-unchange">1,234</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 p-lg-3 pt-1 pb-1 pl-3 pr-3 d-flex justify-content-center align-items-center">
+        <div class="dashboard-counter color-unchange text-light w-100 bg-dark">
+          <div class="counter-title color-unchange">
+            <div class="d-flex color-unchange justify-content-center color-unchange">
+              <div class="icon-sm mr-1 clock color-unchange">
+                <i-lucide name="clock" class="icon-sm d-flex align-items-center"></i-lucide>
+              </div>Bookings
+            </div>
+          </div>
+          <div class="counter-value color-unchange">1,234</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h3>Sales Of The Day</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 vh-75">
+          <div *ngIf="isLoading" class="h-100 mt-2">
+              <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+              </div>
+              <div class="h-100 admin-loading font-md">
+                  Loading...
+              </div>
+          </div>
+          <table class="table table-responsive h-100" *ngIf="!isLoading">
+              <thead>
+                  <tr>
+                      <th *ngFor="let tableHeader of tableHeaders" (click)="sortBy(tableHeader.name)" [class]="tableHeader.class" class="th-sort">
+                          <app-th-arrow [sortDirection]="this.listingOption.sortDirection" [sort]="this.listingOption.sort" [name]="tableHeader.name" [description]="tableHeader.label"></app-th-arrow>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngIf="todayBooking.length === 0">
+                      <td [attr.colspan]="tableHeaders.length">
+                          No result found.
+                      </td>
+                  </tr>
+                  <tr class="listing-row cursor-pointer" *ngFor="let booking of todayBooking; let i = index;" (click)="view(booking)">
+                      <td>
+                          {{ i+1 }}
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <!--<app-pagination *ngIf="listingResult.total.valueOf() > 0 && !isLoading" [totalPages]="listingResult.totalPages" [currentPage]="listingResult.page" (pageChanged)="navigate($event)"></app-pagination>-->
+      </div>
+  </div>
+</div>
+</div>

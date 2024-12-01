@@ -10,20 +10,24 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
-      { 
-        path: 'user', 
+      {
+        path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule)
       },
-      { 
-        path: 'student', 
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'student',
         loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
       },
-      { 
-        path: 'driver', 
+      {
+        path: 'driver',
         loadChildren: () => import('./driver/driver.module').then(m => m.DriverModule)
       },
-      { 
-        path: 'student-document', 
+      {
+        path: 'student-document',
         loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
       }, {
         path: '**', component: Page404Component

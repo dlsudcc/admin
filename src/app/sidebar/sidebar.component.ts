@@ -13,7 +13,8 @@ export class SidebarComponent {
     {name: 'house', icon: 'house', link: 'admin/dashboard', description: 'Dashboard'},
     {name: 'users', icon: 'users', link: 'admin/user', description: 'Users'},
     {name: 'graduation-cap', icon: 'graduation-cap', link: 'admin/student', description: 'Students'},
-    {name: 'id-card', icon: 'id-card', link: 'admin/driver', description: 'Drivers'}
+    {name: 'id-card', icon: 'id-card', link: 'admin/driver', description: 'Drivers'},
+    {name: 'school', icon: 'school', link: 'admin/department', description: 'Departments'}
   ];
   navigateTo(link: string) {
     this.router.navigate([link]);

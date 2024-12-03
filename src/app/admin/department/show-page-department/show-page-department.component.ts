@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserDTO, UserForm } from '../user';
-import { UserService } from '../user.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UpdateUserComponent } from '../update-user/update-user.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogTypes, ConfirmationResponseTypes } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { ToastType } from 'src/app/shared/components/toast/toast';
+import { DepartmentService } from '../department.service';
+import { DepartmentDTO, DepartmentForm } from '../department';
+import { UpdateDepartmentComponent } from '../update-department/update-department.component';
 
 @Component({
-  selector: 'app-show-page-user',
-  templateUrl: './show-page-user.component.html',
-  styleUrls: ['./show-page-user.component.scss']
+  selector: 'app-show-page-department',
+  templateUrl: './show-page-department.component.html',
+  styleUrls: ['./show-page-department.component.scss']
 })
-export class ShowPageUserComponent implements OnInit {
+export class ShowPageDepartmentComponent implements OnInit {
   id: number;
-  user: UserDTO;
+  department: DepartmentDTO;
   isLoading = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
+    private departmentService: DepartmentService,
     private loadingService: LoadingService,
     private toastService: ToastService,
     private modalService: NgbModal
@@ -32,7 +32,7 @@ export class ShowPageUserComponent implements OnInit {
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.id) {
-      this.toastService.add("Error", "This user is not viewable", ToastType.ERROR);
+      this.toastService.add("Error", "This department is not viewable", ToastType.ERROR);
       this.router.navigate(['404']);
       return;
     }
@@ -41,14 +41,14 @@ export class ShowPageUserComponent implements OnInit {
   loadContent() {
     this.isLoading = true;
     this.loadingService.show();
-    this.userService.show(this.id).subscribe(
+    this.departmentService.show(this.id).subscribe(
       {
         next: (result) => {
-          this.user = new UserDTO();
-          this.user = this.user.userMapper(result);
+          this.department = new DepartmentDTO();
+          this.department = this.department.departmentMapper(result);
         },
         error: (error) => {
-          const form = new UserForm();
+          const form = new DepartmentForm();
           form.errors = form.handleFormError(error, form);
           form.otherErrors.forEach(it => {
             this.toastService.add("Error", it, ToastType.ERROR)
@@ -63,12 +63,12 @@ export class ShowPageUserComponent implements OnInit {
     )
   }
   update() {
-    const modalRef = this.modalService.open(UpdateUserComponent, {
+    const modalRef = this.modalService.open(UpdateDepartmentComponent, {
       backdrop: 'static',
       keyboard: false,
       animation: false
     });
-    modalRef.componentInstance.data = this.user;
+    modalRef.componentInstance.data = this.department;
     modalRef.result.then((result) => {
       if (result) {
         this.loadContent();
@@ -88,14 +88,17 @@ export class ShowPageUserComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result == ConfirmationResponseTypes.YES) {
         this.isLoading = true;
-        this.userService.delete(this.user.id).subscribe({next:()=> {
-          this.toastService.add("Success", "User Deleted", ToastType.ERROR);
+        this.departmentService.delete(this.department.id).subscribe({next:()=> {
+          this.toastService.add("Success", "Department Deleted", ToastType.ERROR);
           this.isLoading = false;
-          this.router.navigate(['user']);
+          this.router.navigate(['department']);
         }, complete: ()=>{
           this.isLoading = false;
         }});
       }
     });
   }
+}
+ {
+
 }

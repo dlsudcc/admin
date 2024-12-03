@@ -1,0 +1,74 @@
+
+<div class="w-100">
+  <nav class="navbar navigation">
+      <ul class="m-0 p-0">
+          <li class="cursor-pointer" [routerLink]="'../../department'">Users</li>
+          <li>
+              <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+                  <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
+              </div>
+          </li>
+          <li *ngIf="department" class="highlight-color">{{ department.name }}
+            <app-status-labels [entity]="'DepartmentStatus'" [status]="department.status"></app-status-labels>
+          </li>
+      </ul>
+  </nav>
+  <div class="container" *ngIf="department">
+      <div class="row mt-3">
+          <div class="col-12 d-flex justify-content-end">
+              <div class="dropdown pr-0 pl-2 cursor-pointer">
+              <a
+                  class="nav-link primary-text-color p-0"
+                  href="#"
+                  role="button"
+                  id="updateStatus"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+              >
+                  <div class="d-flex align-items-center">
+                      Status
+                      <div class="icon chevron-down mr-2 color-unchange">
+                          <i-lucide name="chevron-down" class="icon d-flex align-items-center"></i-lucide>
+                      </div>
+                  </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right p-0 cursor-pointer " aria-labelledby="updateStatus">
+                  <a class="dropdown-item d-flex align-items-center" (click)="update()">
+                      <div class="icon pencil mr-2 color-unchange text-secondary">
+                          <i-lucide name="pencil" class="icon d-flex align-items-center"></i-lucide>
+                      </div>
+                      <div class="color-unchange text-secondary">Update</div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center cursor-pointer" (click)="delete()">
+                      <div class="icon trash  mr-2  color-unchange text-danger">
+                          <i-lucide name="trash" class="icon d-flex align-items-center"></i-lucide>
+                      </div>
+                      <div class="color-unchange text-danger">Delete</div>
+                  </a>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Code</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{department.code }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Name</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{department.name }}</span>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4">
+              <label class="form-label fw-bold text-muted">Description</label>
+              <div class="d-flex align-items-center">
+                  <span class="fs-5">{{department.description | nullable }}</span>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

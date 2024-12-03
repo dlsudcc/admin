@@ -29,6 +29,10 @@ const routes: Routes = [
       {
         path: 'student-document',
         loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
+      },
+      {
+        path: 'department',
+        loadChildren: () => import('./department/department.module').then(m => m.DepartmentModule)
       }, {
         path: '**', component: Page404Component
       }

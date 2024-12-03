@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { debounceTime, Subject } from 'rxjs';
 import { ListingResult } from 'src/app/shared/utils/listing-result';
-import { DriverListingOption } from '../driver-listing-options';
+import { DriverListingOption } from '../driver-listing-option';
 import { DriverDTO, DriverStatus, DriverStatusLabels } from '../driver';
 import { BloodType } from '../../student/student';
 import { SectionDTO } from '../../section/section';

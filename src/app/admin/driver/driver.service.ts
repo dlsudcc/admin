@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { DriverListingOption } from './driver-listing-options';
+import { DriverListingOption } from './driver-listing-option';
 import { DriverForm } from './driver';
 
 @Injectable({

@@ -1,36 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { UserListingOption } from '../user-listing-option';
-import { UserService } from '../user.service';
-import { UserDTO } from '../user';
-import { debounceTime, Subject } from 'rxjs';
 import { ListingResult } from 'src/app/shared/utils/listing-result';
+import { DepartmentDTO } from '../department';
+import { DepartmentService } from '../department.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddUserComponent } from '../add-user/add-user.component';
 import { Router } from '@angular/router';
+import { debounceTime, Subject } from 'rxjs';
+import { AddDepartmentComponent } from '../add-department/add-department.component';
+import { DepartmentListingOption } from '../department-listing-option';
 
 @Component({
-  selector: 'app-listing-page-user',
-  templateUrl: './listing-page-user.component.html',
-  styleUrls: ['./listing-page-user.component.scss']
+  selector: 'app-listing-page-department',
+  templateUrl: './listing-page-department.component.html',
+  styleUrls: ['./listing-page-department.component.scss']
 })
-export class ListingPageUserComponent implements OnInit {
-  listingOption: UserListingOption = new UserListingOption();
+export class ListingPageDepartmentComponent implements OnInit {
+  listingOption: DepartmentListingOption = new DepartmentListingOption();
   listingResult: ListingResult = new ListingResult();
   private searchTextChanged = new Subject<string>(); // Subject to handle search text changes
-  users: UserDTO[] = [];
-  user = new UserDTO();
+  departments: DepartmentDTO[] = [];
+  department = new DepartmentDTO();
   tableHeaders = [
     { name: '', label: '', class:"" },
-    { name: 'lastName', label: 'Last Name', class:"col-2" },
-    { name: 'firstName', label: 'First Name', class:"col-2" },
-    { name: 'middleName', label: 'Middle Name', class:"col-2" },
-    { name: 'userName', label: 'Username', class:"col-2" },
-    { name: 'email', label: 'Email', class:"col-2" },
-    { name: 'dateCreated', label: 'Date Created', class:"col-2" },
+    { name: 'code', label: 'Code', class:"col-4" },
+    { name: 'name', label: 'Name', class:"col-4" },
+    { name: 'description', label: 'Description', class:"col-4" }
   ]
   isLoading = false;
   constructor(
-    private userService: UserService,
+    private departmentService: DepartmentService,
     private modalService: NgbModal,
     private route: Router
   ) {
@@ -45,9 +42,9 @@ export class ListingPageUserComponent implements OnInit {
   }
   loadContent() {
     this.isLoading = true;
-    this.userService.users(this.listingOption).subscribe({
+    this.departmentService.departments(this.listingOption).subscribe({
       next: (result: ListingResult) => {
-        this.users = this.user.usersMapper(result.data);
+        this.departments = this.department.departmentsMapper(result.data);
         this.listingResult = result;
       }, complete: () => {
         this.isLoading = false;
@@ -58,7 +55,7 @@ export class ListingPageUserComponent implements OnInit {
     this.searchTextChanged.next(this.listingOption.search);
   }
   addNew () {
-    const modalRef = this.modalService.open(AddUserComponent, {
+    const modalRef = this.modalService.open(AddDepartmentComponent, {
       backdrop: 'static',
       keyboard: false,
       animation: false
@@ -83,7 +80,7 @@ export class ListingPageUserComponent implements OnInit {
     }
     this.loadContent();
   }
-  view (user: UserDTO) {
-    this.route.navigate(['admin/user/'+user.id]);
+  view (department: DepartmentDTO) {
+    this.route.navigate(['admin/department/'+department.id]);
   }
 }

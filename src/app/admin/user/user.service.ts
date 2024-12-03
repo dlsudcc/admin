@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UserForm } from './user';
-import { UserListingOption } from './user-listing-options';
+import { UserListingOption } from './user-listing-option';
 
 @Injectable({
   providedIn: 'root'

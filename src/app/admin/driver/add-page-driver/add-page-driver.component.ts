@@ -59,7 +59,6 @@ export class AddPageDriverComponent implements OnInit {
     private vehicleService: VehicleService,
     private route: Router
   ) {
-    console.log("SD");
   }
   ngOnInit(): void {
     this.driverService.restrictions().subscribe({

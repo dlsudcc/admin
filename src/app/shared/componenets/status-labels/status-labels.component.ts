@@ -15,6 +15,7 @@ export class StatusLabelsComponent implements OnInit {
     StudentStatus:{statusLabels: StudentStatusLabels, statusLabelClass: StudentStatusLabelsClass},
     DriverStatus:{statusLabels: DriverStatusLabels, statusLabelClass: DriverStatusLabelsClass},
     DepartmentStatus:{statusLabels: CommonStatusLabels, statusLabelClass: CommonStatusLabelsClass},
+    CommonStatus:{statusLabels: CommonStatusLabels, statusLabelClass: CommonStatusLabelsClass},
   };
   ngOnInit() {
     if (!this.entities[this.entity]) {

@@ -33,6 +33,10 @@ const routes: Routes = [
       {
         path: 'department',
         loadChildren: () => import('./department/department.module').then(m => m.DepartmentModule)
+      },
+      {
+        path: 'section',
+        loadChildren: () => import('./section/section.module').then(m => m.SectionModule)
       }, {
         path: '**', component: Page404Component
       }

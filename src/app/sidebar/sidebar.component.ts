@@ -14,7 +14,8 @@ export class SidebarComponent {
     {name: 'users', icon: 'users', link: 'admin/user', description: 'Users'},
     {name: 'graduation-cap', icon: 'graduation-cap', link: 'admin/student', description: 'Students'},
     {name: 'id-card', icon: 'id-card', link: 'admin/driver', description: 'Drivers'},
-    {name: 'school', icon: 'school', link: 'admin/department', description: 'Departments'}
+    {name: 'school', icon: 'school', link: 'admin/department', description: 'Departments'},
+    {name: 'layout-panel-top', icon: 'layout-panel-top', link: 'admin/section', description: 'Sections'}
   ];
   navigateTo(link: string) {
     this.router.navigate([link]);

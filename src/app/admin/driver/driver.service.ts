@@ -18,6 +18,17 @@ export class DriverService extends ApiService {
     return this.getRequest('drivers');
   }
 
+  exportTable(listingOption: DriverListingOption) {
+    this.setParameters(
+      {
+        'sort': listingOption?.sort,
+        'search': listingOption?.search,
+        'page': listingOption?.page,
+        'export': listingOption?.export
+      },true
+    )
+    this.export('drivers');
+  }
   addDriver(form: DriverForm) {
     return this.postRequest('driver_new', form.toSubmit());
   }

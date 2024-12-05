@@ -1,0 +1,66 @@
+
+
+<div class="col-12">
+  <div class="container">
+      <div class="row mt-2">
+          <div class="col-12 p-0" >
+              <h5>New Section</h5>
+          </div>
+      </div>
+      <form (ngSubmit)="submitForm()">
+          <div class="row">
+            <div class="col-12 p-0 p-lg-2 col-lg-6">
+                <div class="form-group mb-0">
+                    <app-dropdown
+                        [data]="departments"
+                        (formModelChange)="selectDepartment($event)"
+                        [field]="'name'"
+                        [clearAfterSelect]="false"
+                        [isLoading]="isDropdownLoading"
+                        [error]="form.getError('department')"
+                        [label]="'Department'"
+                        [labelClass]="'form-label'"
+                        (userSearchedText)="searchDepartments($event)">
+                    </app-dropdown>
+                </div>
+                <div *ngIf="form.getError('department')" class="text-danger">
+                    {{ form.getError('department') }}
+                </div>
+            </div>
+              <div class="col-12 p-0 p-lg-2 col-lg-6">
+                  <div class="form-group mb-1">
+                      <label for="name"><strong>Name</strong></label>
+                      <input name="name" type="text" [class]="form.getError('name') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.name" placeholder="Name">
+                  </div>
+                  <div *ngIf="form.getError('name')" class="text-danger">
+                      {{ form.getError('name') }}
+                  </div>
+              </div>
+          </div>
+          <div class="row" *ngIf="form.otherErrors.length > 0">
+              <div class="col-12 pl-2">
+                  <div *ngFor="let error of form.otherErrors" class="text-danger">
+                      {{ error }}
+                  </div>
+              </div>
+          </div>
+          <div class="row mb-2">
+              <div class="col-6 offset-6 d-flex justify-content-end pr-2">
+                  <button class="btn btn-secondary mr-2 pt-1 pb-1" type="button" (click)="close()" [disabled]="isLoading">
+                      <div class="d-flex justify-content-center color-unchange">
+                          Cancel
+                      </div>
+                  </button>
+                  <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
+                      <div class="d-flex justify-content-center color-unchange">
+                          <div class="icon-sm check color-unchange">
+                          <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
+                          </div>
+                          Save
+                      </div>
+                  </button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

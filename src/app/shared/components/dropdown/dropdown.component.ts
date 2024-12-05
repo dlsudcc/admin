@@ -30,7 +30,6 @@ export class DropdownComponent implements OnInit, OnChanges {
   private searchTextChanged = new Subject<string>(); // Subject to handle search text changes
 
   ngOnInit(): void {
-    console.log(this.updateModel);
     if (this.updateModel) {
       this.searchText = this.updateModel[this.field];
     }

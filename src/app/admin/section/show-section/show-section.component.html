@@ -1,0 +1,89 @@
+
+
+
+<nav class="navbar navigation">
+  <ul class="m-0 p-0">
+    <li>Sections</li>
+    <li>
+      <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+        <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
+      </div>
+    </li>
+    <li *ngIf="section" class="highlight-color">
+      {{ section.name }}
+      <app-status-labels [entity]="'CommonStatus'" [status]="section.status"></app-status-labels>
+    </li>
+    <ng-container *ngIf="isUpdate">
+      <li>
+        <div class="ml-2 fa  navigation-icon mr-2 color-unchange chevron-right">
+          <i-lucide name="chevron-right" class="navigation-icon d-flex align-items-center"></i-lucide>
+        </div>
+      </li>
+      <li class="highlight-color">Update</li>
+    </ng-container>
+  </ul>
+</nav>
+<div class="col-12" *ngIf="!isUpdate">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-12 d-flex justify-content-end">
+        <div class="dropdown pr-0 pl-2 cursor-pointer">
+          <a
+            class="nav-link primary-text-color p-0"
+            href="#"
+            role="button"
+            id="updateStatus"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <div class="d-flex align-items-center">
+              Status
+              <div class="icon chevron-down mr-2 color-unchange">
+                <i-lucide name="chevron-down" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right p-0 cursor-pointer " aria-labelledby="updateStatus">
+            <a class="dropdown-item d-flex align-items-center" (click)="update()">
+              <div class="icon pencil mr-2 color-unchange text-warning">
+                <i-lucide name="pencil" class="icon d-flex align-items-center"></i-lucide>
+              </div>
+              <div class="color-unchange text-warning">Update</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 p-0 p-lg-2 col-lg-6">
+        <div class="form-group mb-1">
+          <label class="form-label fw-bold text-muted">Department</label>
+          <div class="d-flex align-items-center">
+              <span class="fs-5">{{ section.department.name }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 p-0 p-lg-2 col-lg-6">
+        <div class="form-group mb-1">
+          <label class="form-label fw-bold text-muted">Name</label>
+          <div class="d-flex align-items-center">
+              <span class="fs-5">{{ section.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 offset-6 d-flex justify-content-end pr-2">
+        <button class="btn btn-secondary mr-2 pt-1 pb-1 mb-2" type="button" (click)="close()" [disabled]="isLoading">
+            <div class="d-flex justify-content-center color-unchange">
+                Close
+            </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isUpdate">
+  <app-update-section [form]="form" (formResult)="updateResult($event)"></app-update-section>
+</div>

@@ -19,6 +19,17 @@ export class DepartmentService extends ApiService {
     )
     return this.getRequest('departments');
   }
+  exportTable(listingOption: DepartmentListingOption) {
+    this.setParameters(
+      {
+        'sort': listingOption?.sort,
+        'search': listingOption?.search,
+        'page': listingOption?.page,
+        'export': listingOption?.export
+      },true
+    )
+    this.export('departments');
+  }
   addDepartment(form: DepartmentForm) {
     return this.postRequest('department_new', form);
   }

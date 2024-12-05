@@ -32,6 +32,10 @@ export class ListingPageDepartmentComponent implements OnInit {
     private route: Router
   ) {
   }
+  export (type:string) {
+    this.listingOption.export = type;
+    this.departmentService.exportTable(this.listingOption);
+  }
   ngOnInit(): void {
     this.searchTextChanged
       .pipe(debounceTime(200)) // 300 ms delay

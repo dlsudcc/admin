@@ -14,11 +14,11 @@ export class ApiService {
   private multipartHeader = new HttpHeaders({
     'enctype': 'multipart/form-data'
   });
-  
+
   private params = new HttpParams();
   public queryParams = '';
   constructor(
-      private httpClient: HttpClient, 
+      private httpClient: HttpClient,
       public cookieService: CookieService
   ) {
   }
@@ -62,5 +62,8 @@ export class ApiService {
   }
   download(location) {
     window.open(`${environment.apiUrl}${location}`, '_blank');
+  }
+  export (endPoint) {
+    window.open(environment.apiUrl+endPoint+'?'+this.queryParams, '_blank');
   }
 }

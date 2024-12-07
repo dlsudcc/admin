@@ -25,48 +25,7 @@
                       </button>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="dropdown dropdown-down pr-0 cursor-pointer">
-                        <a
-                          class="nav-link primary-text-color p-0"
-                          href="#"
-                          role="button"
-                          id="updateStatus"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <div class="d-flex align-items-center justify-content-center">
-                            Export
-                            <div class="icon chevron-down mr-2 color-unchange">
-                              <i-lucide name="chevron-down" class="icon d-flex align-items-center"></i-lucide>
-                            </div>
-                          </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right p-0 cursor-pointer">
-                          <a class="dropdown-item d-flex align-items-center cursor-pointer" (click)="export('pdf')">
-                            <div class="icon file  mr-2  color-unchange text-dark">
-                              <i-lucide name="file" class="icon d-flex align-items-center"></i-lucide>
-                            </div>
-                            <div class="color-unchange text-dark">Export to PDF</div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" (click)="export('excel')">
-                            <div class="icon sheet mr-2 color-unchange text-dark">
-                              <i-lucide name="sheet" class="icon d-flex align-items-center"></i-lucide>
-                            </div>
-                            <div class="color-unchange text-dark">Export to Excel</div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" (click)="export('excelD')">
-                            <div class="icon sheet mr-2 color-unchange text-dark">
-                              <i-lucide name="sheet" class="icon d-flex align-items-center"></i-lucide>
-                            </div>
-                            <div class="color-unchange text-dark">Export to Excel - Detailed</div>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <app-export-control [hasPdf]="true" [hasExcel]="true" [hasExcelDetailed]="true" (result)="export($event)"></app-export-control>
                 </div>
               </div>
             </div>

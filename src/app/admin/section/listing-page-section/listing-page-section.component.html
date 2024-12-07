@@ -12,15 +12,20 @@
           <div class="col-12 col-lg-10 mb-2 mt-2">
             <input type="text" class="form-control form-control-md" [(ngModel)]="this.listingOption.search" placeholder="Enter Department, Name" (ngModelChange)="onSearchChanged()">
           </div>
-          <div class="col-12 col-lg-2 mt-lg-2">
-            <button class="btn btn-success pt-1 pb-1 w-100" (click)="addNew()">
-              <div class="d-flex justify-content-center color-unchange">
-                <div class="icon-sm plus color-unchange">
-                <i-lucide name="plus" class="icon-sm d-flex align-items-center"></i-lucide>
-                </div>
-                Add New Section
+          <div class="col-12 col-lg-2 mb-2 mt-2">
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-success pt-1 pb-1 w-100" (click)="addNew()">
+                  <div class="d-flex justify-content-center color-unchange">
+                    <div class="icon-sm plus color-unchange">
+                    <i-lucide name="plus" class="icon-sm d-flex align-items-center"></i-lucide>
+                    </div>
+                    Add New Section
+                  </div>
+                </button>
               </div>
-            </button>
+            </div>
+            <app-export-control [hasPdf]="true" [hasExcel]="true" (result)="export($event)"></app-export-control>
           </div>
         </div>
       </div>

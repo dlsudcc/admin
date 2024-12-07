@@ -97,7 +97,7 @@ button {
     color: $dark-link-color !important;
     text-decoration: none !important;
   }
-  a:hover {
+  a:hover:not(.unchange) {
     color: $dark-link-color-hover !important;
     background-color: $dark-header-bg !important;
     text-decoration: none !important;

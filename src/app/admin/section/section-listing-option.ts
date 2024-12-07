@@ -4,6 +4,7 @@ export class SectionListingOption {
   search: string;
   sort: string;
   page: string;
+  export: string;
   status: string;
   departments: DepartmentDTO[] = [];
   get sortDirection () {

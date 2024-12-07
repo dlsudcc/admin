@@ -61,6 +61,10 @@ export class ListingPageStudentComponent implements OnInit {
   toggleFilter() {
     this.filter = !this.filter;
   }
+  export (type:string) {
+    this.listingOption.export = type;
+    this.studentService.exportTable(this.listingOption);
+  }
   selectDepartment(department) {
     this.listingOption.departments.push(department);
     this.departments = [];

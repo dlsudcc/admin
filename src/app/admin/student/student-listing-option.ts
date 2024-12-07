@@ -13,6 +13,7 @@ export class StudentListingOption {
     section: SectionFragment;
     barangays= [];
     city: string;
+    export: string;
     province: string;
     region: string;
     isEnrolledAsDriver: boolean;

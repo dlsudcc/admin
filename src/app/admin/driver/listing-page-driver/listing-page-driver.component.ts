@@ -52,6 +52,10 @@ export class ListingPageDriverComponent implements OnInit {
     private route: Router
   ) {
   }
+  export (type:string) {
+    this.listingOption.export = type;
+    this.driverService.exportTable(this.listingOption);
+  }
   ngOnInit(): void {
     this.searchTextChanged
       .pipe(debounceTime(200)) // 300 ms delay

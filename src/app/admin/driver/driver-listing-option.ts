@@ -9,6 +9,7 @@ export class DriverListingOption {
     email: string;
     sort: string;
     page: string;
+    export: string;
     status: DriverStatus = DriverStatus.ALL;
     departments: DepartmentDTO[] = [];
     years = [];

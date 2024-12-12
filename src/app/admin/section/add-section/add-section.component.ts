@@ -37,7 +37,7 @@ export class AddSectionComponent {
     this.isDropdownLoading = true;
     if (department) {
       this.sectionService.departments({
-        department: department,
+        department: department
         // exclude: this.form.department?.id
       }).subscribe({
         next: (it) => {

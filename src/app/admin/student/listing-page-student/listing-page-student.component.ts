@@ -61,6 +61,10 @@ export class ListingPageStudentComponent implements OnInit {
   toggleFilter() {
     this.filter = !this.filter;
   }
+  export (type:string) {
+    this.listingOption.export = type;
+    this.studentService.exportTable(this.listingOption);
+  }
   selectDepartment(department) {
     this.listingOption.departments.push(department);
     this.departments = [];
@@ -71,6 +75,7 @@ export class ListingPageStudentComponent implements OnInit {
     this.isDropdownLoading = true;
     this.studentService.departments({
       department: department,
+      includeStudent: true,
       exclude: this.listingOption?.departments.length > 0 ? this.listingOption.departments?.map(it=>it.id) : null
     }).subscribe({
       next: (it) => {

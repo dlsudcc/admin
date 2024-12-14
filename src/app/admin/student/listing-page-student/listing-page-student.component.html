@@ -13,14 +13,7 @@
                         <input type="text" class="form-control form-control-md" [(ngModel)]="this.listingOption.search" placeholder="Enter Last Name, First Name, Middle Name, Department" (ngModelChange)="onSearchChanged()">
                     </div>
                     <div class="col-12 col-lg-2 mt-lg-2">
-                        <button class="btn btn-success pt-1 pb-1 w-100" (click)="addNew()">
-                            <div class="d-flex justify-content-center color-unchange">
-                                <div class="icon-sm plus color-unchange">
-                                <i-lucide name="plus" class="icon-sm d-flex align-items-center"></i-lucide>
-                                </div>
-                                Add New Student
-                            </div>
-                        </button>
+                      <app-export-control [hasPdf]="true" [hasExcel]="true" [hasExcelDetailed]="true" (result)="export($event)"></app-export-control>
                     </div>
                 </div>
             </div>
@@ -39,8 +32,8 @@
         <div class="row bg-white pt-1" *ngIf="filter">
             <div class="col-12 col-md-4">
                 <div class="form-group mb-0">
-                    <app-dropdown 
-                        [data]="years" 
+                    <app-dropdown
+                        [data]="years"
                         (formModelChange)="selectYear($event)"
                         [field]="'year'"
                         [isLoading]="isDropdownLoading"
@@ -62,8 +55,8 @@
             </div>
             <div class="col-12 col-md-4">
                 <div class="form-group mb-0">
-                    <app-dropdown 
-                        [data]="departments" 
+                    <app-dropdown
+                        [data]="departments"
                         (formModelChange)="selectDepartment($event)"
                         [field]="'description'"
                         [isLoading]="isDropdownLoading"
@@ -98,8 +91,8 @@
         <div class="row bg-white pt-1" *ngIf="filter">
             <div class="col-12 col-md-4">
                 <div class="form-group mb-0">
-                    <app-dropdown 
-                        [data]="barangays" 
+                    <app-dropdown
+                        [data]="barangays"
                         (formModelChange)="selectBarangay($event)"
                         [field]="'barangay'"
                         [isLoading]="isDropdownLoading"

@@ -45,6 +45,10 @@ export class ListingPageSectionComponent implements OnInit {
     });
     this.loadContent();
   }
+  export (type:string) {
+    this.listingOption.export = type;
+    this.sectionService.exportTable(this.listingOption);
+  }
   loadContent() {
     this.isLoading = true;
     this.sectionService.sections(this.listingOption).subscribe({

@@ -1,0 +1,91 @@
+
+
+<div class="col-12">
+  <div class="container">
+      <div class="row mt-2">
+          <div class="col-12 p-0" >
+              <h5>New Guardian</h5>
+          </div>
+      </div>
+      <form (ngSubmit)="submitForm()">
+          <div class="row">
+              <div class="col-12 p-0 p-lg-2">
+                  <div class="form-group">
+                    <label for="status"><strong>Relationship</strong></label>
+                    <select class="form-control" [class]="form.getError('relationship') ? 'border-danger': ''" [(ngModel)]="form.relationship" name="type">
+                      <option [value]="RelationshipType.NONE">Select Relationship</option>
+                      <option [value]="RelationshipType.FATHER">{{RelationshipTypeLabels[RelationshipType.FATHER]}}</option>
+                      <option [value]="RelationshipType.MOTHER">{{RelationshipTypeLabels[RelationshipType.MOTHER]}}</option>
+                      <option [value]="RelationshipType.SIBLING">{{RelationshipTypeLabels[RelationshipType.SIBLING]}}</option>
+                      <option [value]="RelationshipType.OTHER">{{RelationshipTypeLabels[RelationshipType.OTHER]}}</option>
+                    </select>
+                  </div>
+                  <div *ngIf="form.getError('relationship')" class="text-danger">
+                      {{ form.getError('relationship') }}
+                  </div>
+                  <div class="form-group mb-1" *ngIf="form.relationship === RelationshipType.OTHER" name="otherType">
+                      <label for="otherType"><strong>Other</strong></label>
+                      <input name="otherType" type="text" [class]="form.getError('otherType') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.otherType" placeholder="Relationship Type">
+                  </div>
+                  <div *ngIf="form.getError('otherType')" class="text-danger">
+                      {{ form.getError('otherType') }}
+                  </div>
+                  <div class="form-group mb-1" name="lastName">
+                      <label for="lastName"><strong>Last Name</strong></label>
+                      <input name="lastName" type="text" [class]="form.getError('lastName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.lastName" placeholder="Last Name">
+                  </div>
+                  <div *ngIf="form.getError('lastName')" class="text-danger">
+                      {{ form.getError('lastName') }}
+                  </div>
+                  <div class="form-group mb-1" name="firstName">
+                      <label for="firstName"><strong>First Name</strong></label>
+                      <input name="firstName" type="text" [class]="form.getError('firstName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.firstName" placeholder="First Name">
+                  </div>
+                  <div *ngIf="form.getError('firstName')" class="text-danger">
+                      {{ form.getError('firstName') }}
+                  </div>
+                  <div class="form-group mb-1" name="middleName">
+                      <label for="middleName"><strong>Middle Name (Optional)</strong></label>
+                      <input name="middleName" type="text" [class]="form.getError('middleName') ? 'border-danger': ''" class="form-control form-control-md" [(ngModel)]="form.middleName" placeholder="Middle Name">
+                  </div>
+                  <div *ngIf="form.getError('middleName')" class="text-danger">
+                      {{ form.getError('middleName') }}
+                  </div>
+                  <div class="form-group mb-1" name="contactNumber">
+                    <label for="contactNumber"><strong>Contact Number</strong></label>
+
+                    <input name="contactNumber"
+                      type="number"
+                      maxlength="11"
+                      [class]="form.getError('contactNumber') ? 'border-danger': ''"
+                      class="form-control form-control-md no-spin"
+                      (keypress)="preventExtraDecimals($event)"
+                      [(ngModel)]="form.contactNumber"
+                      placeholder="Contact Number"
+                    >
+                  </div>
+                  <div *ngIf="form.getError('contactNumber')" class="text-danger">
+                      {{ form.getError('contactNumber') }}
+                  </div>
+              </div>
+          </div>
+          <div class="row mb-2">
+              <div class="col-6 offset-6 d-flex justify-content-end pr-lg-2">
+                  <button class="btn btn-secondary mr-2 pt-1 pb-1" type="button" (click)="close()" [disabled]="isLoading">
+                      <div class="d-flex justify-content-center color-unchange">
+                          Cancel
+                      </div>
+                  </button>
+                  <button class="btn btn-success pt-1 pb-1" type="submit" [disabled]="isLoading">
+                      <div class="d-flex justify-content-center color-unchange">
+                          <div class="icon-sm check color-unchange">
+                              <i-lucide name="check" class="icon-sm d-flex align-items-center"></i-lucide>
+                          </div>
+                          Save
+                      </div>
+                  </button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

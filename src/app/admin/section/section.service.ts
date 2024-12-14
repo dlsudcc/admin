@@ -20,6 +20,18 @@ export class SectionService extends ApiService {
     )
     return this.getRequest('sections');
   }
+  exportTable(listingOption: SectionListingOption) {
+    this.setParameters(
+      {
+        'sort': listingOption?.sort,
+        'search': listingOption?.search,
+        'export': listingOption?.export,
+        'department': listingOption?.departments?.map(it=>it.id),
+        'page': listingOption?.page
+      },true
+    )
+    this.export('sections');
+  }
   addSection(form: SectionForm) {
     return this.postRequest('section_new', form.toSubmit());
   }

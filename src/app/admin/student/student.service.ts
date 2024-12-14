@@ -23,6 +23,22 @@ export class StudentService extends ApiService {
     )
     return this.getRequest('students');
   }
+  exportTable(listingOption: StudentListingOption) {
+    this.setParameters(
+      {
+        'sort': listingOption?.sort,
+        'search': listingOption?.search,
+        'page': listingOption?.page,
+        'department': listingOption?.departments?.map(it=>it.id),
+        'year': listingOption?.years?.map(it=>it.year),
+        'status': listingOption?.status,
+        'export': listingOption?.export,
+        'barangay': listingOption?.barangays?.map(it=>it.barangay),
+        'isEnrolledAsDriver': listingOption.isEnrolledAsDriver,
+      },true
+    )
+    this.export('students');
+  }
   addStudent(form: StudentForm) {
     return this.postRequest('student_new', form);
   }
@@ -41,6 +57,10 @@ export class StudentService extends ApiService {
   departments(params) {
     this.setParameters(params, true);
     return this.getRequest('student_departments/');
+  }
+  sections(params) {
+    this.setParameters(params, true);
+    return this.getRequest('student_sections/');
   }
   years(params) {
     this.setParameters(params, true);

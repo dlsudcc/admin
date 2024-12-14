@@ -11,7 +11,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { NullablePipe } from './pipes/nullable.pipe';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { StatusLabelsComponent } from './componenets/status-labels/status-labels.component';
+import { StatusLabelsComponent } from './components/status-labels/status-labels.component';
+import { ExportControlComponent } from './components/export-control/export-control.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,13 @@ import { StatusLabelsComponent } from './componenets/status-labels/status-labels
     NullablePipe,
     ConfirmationDialogComponent,
     DropdownComponent,
-    StatusLabelsComponent
+    StatusLabelsComponent,
+    ExportControlComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     LucideAngularModule.pick(icons),
   ],
@@ -43,7 +45,8 @@ import { StatusLabelsComponent } from './componenets/status-labels/status-labels
     ThArrowComponent,
     NullablePipe,
     DropdownComponent,
-    StatusLabelsComponent
+    StatusLabelsComponent,
+    ExportControlComponent
   ],
   providers: [
     LoadingService

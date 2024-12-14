@@ -75,6 +75,7 @@ export class ListingPageStudentComponent implements OnInit {
     this.isDropdownLoading = true;
     this.studentService.departments({
       department: department,
+      includeStudent: true,
       exclude: this.listingOption?.departments.length > 0 ? this.listingOption.departments?.map(it=>it.id) : null
     }).subscribe({
       next: (it) => {

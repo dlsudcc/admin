@@ -9,6 +9,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { Page404Component } from './page404/page404.component';
 import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component';
 import { UpdateVehicleComponent } from './vehicle/update-vehicle/update-vehicle.component';
+import { AddGuardianComponent } from './guardian/add-guardian/add-guardian.component';
+import { UpdateGuardianComponent } from './guardian/update-guardian/update-guardian.component';
 
 
 
@@ -20,7 +22,9 @@ import { UpdateVehicleComponent } from './vehicle/update-vehicle/update-vehicle.
     AdminComponent,
     Page404Component,
     AddVehicleComponent,
-    UpdateVehicleComponent
+    UpdateVehicleComponent,
+    AddGuardianComponent,
+    UpdateGuardianComponent
   ],
   imports: [
     CommonModule,

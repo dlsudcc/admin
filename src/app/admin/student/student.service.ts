@@ -58,6 +58,10 @@ export class StudentService extends ApiService {
     this.setParameters(params, true);
     return this.getRequest('student_departments/');
   }
+  sections(params) {
+    this.setParameters(params, true);
+    return this.getRequest('student_sections/');
+  }
   years(params) {
     this.setParameters(params, true);
     return this.getRequest('student_years/');

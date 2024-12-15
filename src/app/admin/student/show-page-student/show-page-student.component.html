@@ -17,7 +17,7 @@
 </div>
 
 <div class="container" *ngIf="student">
-    <div class="row mt-2" *ngIf="student.canVerify">
+    <div class="row mt-2">
         <div class="col-12 d-flex justify-content-end">
             <div class="dropdown pr-0 pl-2 cursor-pointer">
                 <a
@@ -30,10 +30,10 @@
                     aria-expanded="false"
                 >
                     <div class="d-flex align-items-center">
-                        Status 
+                        Status
                         <div class="icon chevron-down mr-2 color-unchange">
                             <i-lucide name="chevron-down" class="icon d-flex align-items-center"></i-lucide>
-                        </div> 
+                        </div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right p-0 cursor-pointer " aria-labelledby="updateStatus">
@@ -43,12 +43,12 @@
                         </div>
                         <div class="color-unchange text-info">Set as Verified</div>
                     </a>
-                    <!-- <a class="dropdown-item d-flex align-items-center cursor-pointer" (click)="delete()">
-                        <div class="icon trash  mr-2  color-unchange text-danger">
-                            <i-lucide name="trash" class="icon d-flex align-items-center"></i-lucide>
+                    <a class="dropdown-item d-flex align-items-center cursor-pointer" (click)="update()">
+                        <div class="icon pencil  mr-2  color-unchange text-warning">
+                            <i-lucide name="pencil" class="icon d-flex align-items-center"></i-lucide>
                         </div>
-                        <div class="color-unchange text-danger">Delete</div>
-                    </a> -->
+                        <div class="color-unchange text-warning">Update</div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -284,44 +284,55 @@
                             {{ document.remarks }}
                         </td>
                         <td>
-                            <button class="btn btn-info color-unchange" (click)="viewDocument(document)">
-                                <div class="d-flex justify-content-center color-unchange">
-                                    <div class="icon-sm download color-unchange">
-                                    <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="btn ml-1 btn-warning color-unchange" (click)="updateDocument(document)">
-                                <div class="d-flex justify-content-center color-unchange">
-                                    <div class="icon-sm pencil color-unchange">
-                                    <i-lucide name="pencil" class="icon-sm d-flex align-items-center"></i-lucide>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="btn ml-1 btn-danger color-unchange" (click)="deleteDocument(document)">
-                                <div class="d-flex justify-content-center color-unchange">
-                                    <div class="icon-sm trash color-unchange">
-                                    <i-lucide name="trash" class="icon-sm d-flex align-items-center"></i-lucide>
-                                    </div>
-                                </div>
-                            </button>
+                          <button class="btn btn-info color-unchange" (click)="viewDocument(document)">
+                              <div class="d-flex justify-content-center color-unchange">
+                                  <div class="icon-sm download color-unchange">
+                                  <i-lucide name="download" class="icon-sm d-flex align-items-center"></i-lucide>
+                                  </div>
+                              </div>
+                          </button>
                         </td>
                     </tr>
-                    <!-- <tr *ngFor="let product of products; let i = index" class="cursor-pointer" (click)="showProduct(product.id)">
-                        <td>{{ i + 1}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table table-responsive h-100" *ngIf="!isLoading">
+                <thead>
+                    <tr>
+                        <th *ngFor="let tableHeader of guardianHeaders" [class]="tableHeader.class" class="th-sort">
+                            {{ tableHeader.label }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="student.guardians.length === 0">
+                        <td [attr.colspan]="guardianHeaders.length">
+                            No result found.
+                        </td>
+                    </tr>
+                    <tr class="listing-row cursor-pointer" *ngFor="let guardian of student.guardians; let i = index;">
                         <td>
-                            {{ product.productName }}
-                            <status-labels [type]="ProductStatusLabels[product.status]"></status-labels>
+                            {{ i+1 }}
                         </td>
-                        <td>{{ product.category.name }}</td>
-                        <td>{{ product.merchant.name }}</td>
-                        <td class="text-right">{{ product.price.toString() | number: '1.2-2' }}</td>
-                        <td class="text-right">{{ product.quantity.toString() | number: '1.2-2' }}</td>
-                        <td>{{ product.createdAt | date: 'M-d-YYYY' }}</td>
+                        <td>
+                          {{ guardian.relationship }}
+                        </td>
+                        <td>
+                          {{ guardian.lastName }}
+                        </td>
+                        <td>
+                          {{ guardian.firstName }}
+                        </td>
+                        <td>
+                          {{ guardian.middleName | nullable }}
+                        </td>
+                        <td>
+                          {{ guardian.contactNumber }}
+                        </td>
                     </tr>
-                    <tr *ngIf="products.length == 0">
-                        <td colspan="9" class="text-center">No result found.</td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>

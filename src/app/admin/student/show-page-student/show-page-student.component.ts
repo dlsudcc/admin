@@ -13,6 +13,7 @@ import { DocumentDTO, DocumentType, DocumentTypeLabels } from '../../document/do
 import { AddDocumentComponent } from '../../document/add-document/add-document.component';
 import { DocumentService } from '../../document/document.service';
 import { UpdateDocumentComponent } from '../../document/update-document/update-document.component';
+import { RelationshipTypeLabels } from '../../guardian/guardian';
 
 @Component({
   selector: 'app-show-page-student',
@@ -24,6 +25,7 @@ export class ShowPageStudentComponent implements OnInit {
   student: StudentDTO;
   listingOption = new DocumentListingOption();
   DocumentTypeLabels = DocumentTypeLabels;
+  RelationshipTypeLabels = RelationshipTypeLabels;
   DocumentType = DocumentType;
   StudentStatus = StudentStatus;
   isLoading = false;
@@ -32,6 +34,14 @@ export class ShowPageStudentComponent implements OnInit {
     { name: 'type', label: 'Type', class:"col-4" },
     { name: 'remarks', label: 'Remarks', class:"col-4" },
     { name: '', label: 'Action', class:"col-4" }
+  ]
+  guardianHeaders = [
+    { name: '', label: '', class:"" },
+    { name: 'relationship', label: 'Relationship', class:"col-3" },
+    { name: 'lastName', label: 'Last Name', class:"col-2" },
+    { name: 'firstName', label: 'First Name', class:"col-2" },
+    { name: 'middleName', label: 'Middle Name', class:"col-2 " },
+    { name: 'contactNumber', label: 'ContactNumber', class:"col-3" }
   ]
   constructor(
     private route: ActivatedRoute,
@@ -77,6 +87,33 @@ export class ShowPageStudentComponent implements OnInit {
       }
     )
   }
+  loadContent() {
+    this.isLoading = true;
+    this.loadingService.show();
+    this.studentService.show(this.id).subscribe(
+      {
+        next: (result) => {
+          this.student = new StudentDTO();
+          this.student = this.student.studentMapper(result);
+        },
+        error: (error) => {
+          const form = new StudentForm();
+          form.errors = form.handleFormError(error, form);
+          form.otherErrors.forEach(it => {
+            this.toastService.add("Error", it, ToastType.ERROR)
+          })
+          this.router.navigate(['404']);
+        },
+        complete: () => {
+          this.loadingService.hide();
+          this.isLoading = false;
+        }
+      }
+    )
+  }
+  update() {
+    this.router.navigate(['admin/student/'+this.student.id+'/update'])
+  }
   viewDocument(document: DocumentDTO){
     this.documentService.download(document.location);
   }
@@ -117,33 +154,6 @@ export class ShowPageStudentComponent implements OnInit {
     }).catch((error) => {
       console.error(error);
     });
-  }
-  loadContent() {
-    this.isLoading = true;
-    this.loadingService.show();
-    this.studentService.show(this.id).subscribe(
-      {
-        next: (result) => {
-          this.student = new StudentDTO();
-          this.student = this.student.studentMapper(result);
-        },
-        error: (error) => {
-          const form = new StudentForm();
-          form.errors = form.handleFormError(error, form);
-          form.otherErrors.forEach(it => {
-            this.toastService.add("Error", it, ToastType.ERROR)
-          })
-          this.router.navigate(['404']);
-        },
-        complete: () => {
-          this.loadingService.hide();
-          this.isLoading = false;
-        }
-      }
-    )
-  }
-  update() {
-    console.log("SD");
   }
   updateDocument(document: DocumentDTO) {
     const modalRef = this.modalService.open(UpdateDocumentComponent, {

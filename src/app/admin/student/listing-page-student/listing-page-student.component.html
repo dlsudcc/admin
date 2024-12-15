@@ -13,7 +13,7 @@
                         <input type="text" class="form-control form-control-md" [(ngModel)]="this.listingOption.search" placeholder="Enter Last Name, First Name, Middle Name, Department" (ngModelChange)="onSearchChanged()">
                     </div>
                     <div class="col-12 col-lg-2 mt-lg-2">
-                      <app-export-control [hasPdf]="true" [hasExcel]="true" (result)="export($event)"></app-export-control>
+                      <app-export-control [hasPdf]="true" [hasExcel]="true" [hasExcelDetailed]="true" (result)="export($event)"></app-export-control>
                     </div>
                 </div>
             </div>

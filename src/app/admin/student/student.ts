@@ -5,6 +5,7 @@ import { AddressFragment } from "../address/address";
 import { AuthFragment } from "src/app/shared/models/auth";
 import { Mapper } from "src/app/shared/utils/mapper";
 import { DocumentDTO } from "../document/document";
+import { GuardianDTO } from "../guardian/guardian";
 export enum BloodType {
     A = 'A',
     B = 'B',
@@ -38,6 +39,7 @@ export interface iStudent {
     name: string;
     sex: string;
     profilePicture: string;
+    guardians: GuardianDTO[];
     birthDate: Date;
     bloodType: BloodType;
     department: DepartmentFragment;
@@ -62,6 +64,7 @@ export class StudentDTO implements iStudent {
     middleName: string;
     profilePicture: string;
     documents: DocumentDTO[] = [];
+    guardians: GuardianDTO[] = [];
     birthDate: Date;
     canVerify: boolean;
     bloodType: BloodType;
@@ -103,6 +106,7 @@ export class StudentForm extends FormUtils implements iStudent, iFormRules {
     department: DepartmentFragment;
     section: SectionFragment;
     documents: DocumentDTO[] = [];
+    guardians: GuardianDTO[] = [];
     year: number;
     homeAddress: AddressFragment;
     permanentAddress: AddressFragment;
@@ -119,6 +123,8 @@ export class StudentForm extends FormUtils implements iStudent, iFormRules {
         this.lastName = student?.lastName;
         this.firstName = student?.firstName;
         this.middleName = student?.middleName;
+        this.documents = student?.documents;
+        this.guardians = student?.guardians;
         this.profilePicture = student?.profilePicture;
         this.birthDate = student?.birthDate;
         this.bloodType = student?.bloodType;

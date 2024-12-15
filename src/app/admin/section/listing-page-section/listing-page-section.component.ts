@@ -71,6 +71,7 @@ export class ListingPageSectionComponent implements OnInit {
     if (department) {
       this.sectionService.departments({
         department: department,
+        includeSection: true,
         exclude: this.listingOption?.departments.length > 0 ? this.listingOption.departments?.map(it=>it.id) : null
       }).subscribe({
         next: (it) => {
